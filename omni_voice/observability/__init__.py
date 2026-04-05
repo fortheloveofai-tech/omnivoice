@@ -1,0 +1,1 @@
+from omni_voice.observability.metrics import start_metrics_server

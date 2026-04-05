@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>OmniVoice — Terminal</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0a;--s:#111;--g:#00ff88;--g2:#00cc6a;--gm:#00ff8855;--t:#d0d0d0;--m:#555;--mono:'JetBrains Mono',monospace}
+body{background:var(--bg);color:var(--t);font-family:var(--mono);overflow-x:hidden;min-height:100vh}
+
+/* scanlines */
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,136,.015) 2px,rgba(0,255,136,.015) 4px);pointer-events:none;z-index:999}
+
+nav{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;border-bottom:1px solid #1a1a1a}
+.logo{color:var(--g);font-size:16px;font-weight:700}
+.logo span{color:#555}
+.nav-right{display:flex;gap:24px;align-items:center}
+.nav-link{color:var(--m);font-size:13px;text-decoration:none;transition:color .2s}
+.nav-link:hover{color:var(--g)}
+.nav-btn{border:1px solid var(--g);color:var(--g);background:transparent;padding:7px 16px;font-family:var(--mono);font-size:12px;cursor:pointer;transition:background .2s}
+.nav-btn:hover{background:rgba(0,255,136,.1)}
+
+/* hero */
+.hero{padding:80px 40px 60px;max-width:900px;margin:0 auto}
+.prompt{color:var(--m);font-size:13px;margin-bottom:40px}
+.prompt span{color:var(--g)}
+
+.hero-cmd{margin-bottom:60px}
+.cmd-line{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.dollar{color:var(--g);font-size:15px}
+.cmd-text{font-size:15px;color:#fff;overflow:hidden;white-space:nowrap}
+.typed{border-right:2px solid var(--g);animation:blink 1s step-end infinite}
+@keyframes blink{50%{border-color:transparent}}
+
+.output-block{margin:24px 0 24px 28px;border-left:2px solid #1a1a1a;padding-left:20px}
+.out-line{display:flex;align-items:center;gap:12px;padding:4px 0;font-size:13px;opacity:0;animation:fadeIn .3s ease forwards}
+.out-key{color:var(--m);min-width:180px}
+.out-val{color:#fff}
+.ok{color:var(--g);font-weight:700}
+.warn{color:#ffcc00}
+.err{color:#ff4444}
+.out-sep{border-top:1px solid #1a1a1a;margin:8px 0}
+
+.hero-headline{margin:48px 0 32px}
+.hero-headline h1{font-size:clamp(32px,5vw,64px);font-weight:700;line-height:1.05;color:#fff;letter-spacing:-2px}
+.hero-headline h1 .g{color:var(--g)}
+.hero-headline h1 .dim{color:var(--m)}
+.hero-sub{font-size:14px;color:var(--m);line-height:1.8;max-width:600px;margin-top:16px}
+
+/* waitlist form styled as terminal input */
+.term-form{margin-top:40px;display:flex;flex-direction:column;gap:0}
+.form-line{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #1a1a1a}
+.form-label{color:var(--g);font-size:13px;min-width:200px}
+.form-input{flex:1;background:transparent;border:none;color:#fff;font-family:var(--mono);font-size:13px;outline:none;caret-color:var(--g)}
+.form-input::placeholder{color:#333}
+.term-submit{margin-top:16px;display:flex;align-items:center;gap:12px}
+.term-submit button{background:var(--g);color:#000;border:none;padding:10px 24px;font-family:var(--mono);font-size:13px;font-weight:700;cursor:pointer;transition:opacity .2s}
+.term-submit button:hover{opacity:.85}
+.term-note{font-size:12px;color:#333}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #1a1a1a;border-bottom:1px solid #1a1a1a;margin:0 0 60px}
+.s{padding:24px 40px;border-right:1px solid #1a1a1a}
+.s:last-child{border-right:none}
+.s-n{font-size:28px;font-weight:700;color:var(--g)}
+.s-l{font-size:12px;color:var(--m);margin-top:4px}
+
+/* pipeline section */
+.section{padding:60px 40px;max-width:900px;margin:0 auto}
+.sec-head{color:var(--m);font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-bottom:32px}
+.pipe-vis{display:flex;flex-direction:column;gap:0;border:1px solid #1a1a1a;border-radius:4px;overflow:hidden}
+.pipe-row-item{display:flex;align-items:center;padding:14px 20px;border-bottom:1px solid #1a1a1a;transition:background .2s;cursor:default}
+.pipe-row-item:last-child{border-bottom:none}
+.pipe-row-item:hover{background:#111}
+.p-idx{color:#333;font-size:12px;min-width:32px}
+.p-name{color:var(--g);font-weight:700;font-size:14px;min-width:80px}
+.p-desc{color:var(--m);font-size:13px;flex:1}
+.p-ms{color:var(--g2);font-size:12px;margin-left:auto}
+.p-status{color:var(--g);font-size:11px;margin-left:16px}
+
+/* features */
+.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#1a1a1a;border:1px solid #1a1a1a;border-radius:4px;overflow:hidden;max-width:900px;margin:0 40px}
+.feat-item{background:var(--bg);padding:28px;transition:background .2s}
+.feat-item:hover{background:#0d0d0d}
+.fi-tag{font-size:11px;color:var(--g);margin-bottom:10px;letter-spacing:1px}
+.fi-title{font-size:15px;color:#fff;font-weight:600;margin-bottom:8px}
+.fi-desc{font-size:12px;color:var(--m);line-height:1.7}
+
+/* footer */
+footer{border-top:1px solid #1a1a1a;padding:24px 40px;display:flex;justify-content:space-between;align-items:center}
+footer .logo{font-size:14px}
+footer p{font-size:12px;color:#333}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">omnivoice<span>.dev</span></div>
+  <div class="nav-right">
+    <a href="#" class="nav-link">docs</a>
+    <a href="#" class="nav-link">github</a>
+    <button class="nav-btn">[ join waitlist ]</button>
+  </div>
+</nav>
+
+<div style="padding:60px 40px 0;max-width:900px;margin:0 auto">
+  <div class="prompt"><span>omguhan@omnivoice</span>:~$ <span style="color:#fff">omnivoice --status</span></div>
+</div>
+
+<div class="output-block" style="margin:0 0 0 68px;padding:0 0 0 20px;border-left:2px solid #1a1a1a">
+  <div class="out-line" style="animation-delay:.1s"><span class="out-key">platform</span><span class="out-val">OmniVoice v0.1.0</span></div>
+  <div class="out-line" style="animation-delay:.3s"><span class="out-key">asr_provider</span><span class="out-val">deepgram <span class="ok">[ OK ]</span></span></div>
+  <div class="out-line" style="animation-delay:.5s"><span class="out-key">llm_provider</span><span class="out-val">openai/gpt-4o-mini <span class="ok">[ OK ]</span></span></div>
+  <div class="out-line" style="animation-delay:.7s"><span class="out-key">tts_provider</span><span class="out-val">openai <span class="ok">[ OK ]</span></span></div>
+  <div class="out-sep" style="animation-delay:.8s;opacity:0;animation:fadeIn .3s .8s forwards"></div>
+  <div class="out-line" style="animation-delay:.9s"><span class="out-key">latency_p50</span><span class="out-val" style="color:var(--g)">247ms</span></div>
+  <div class="out-line" style="animation-delay:1.1s"><span class="out-key">latency_p99</span><span class="out-val">298ms</span></div>
+  <div class="out-line" style="animation-delay:1.3s"><span class="out-key">audio_on_server</span><span class="out-val" style="color:var(--g)">true ✓</span></div>
+  <div class="out-line" style="animation-delay:1.5s"><span class="out-key">vendor_lock_in</span><span class="out-val" style="color:#ff4444">false ✓</span></div>
+  <div class="out-sep" style="animation-delay:1.6s;opacity:0;animation:fadeIn .3s 1.6s forwards"></div>
+  <div class="out-line" style="animation-delay:1.7s"><span class="out-key">status</span><span class="ok" style="font-size:14px">Your voice AI is live. 🎙️</span></div>
+</div>
+
+<div style="padding:0 40px;max-width:900px;margin:40px auto 0">
+  <h1 style="font-size:clamp(28px,4vw,52px);font-weight:700;color:#fff;line-height:1;letter-spacing:-2px">Voice AI infrastructure<br/><span style="color:var(--g)">without the tax.</span></h1>
+  <p style="font-size:14px;color:var(--m);line-height:1.8;margin-top:16px;max-width:560px">Self-hosted, provider-agnostic, sub-300ms pipeline. Own your audio. Kill the per-minute bill.</p>
+
+  <div class="term-form" style="margin-top:40px;max-width:560px">
+    <div class="form-line">
+      <span class="form-label">enter_email:</span>
+      <input class="form-input" type="email" id="em" placeholder="your@email.com"/>
+    </div>
+    <div class="term-submit">
+      <button onclick="handleJoin()">$ join_waitlist --early-access</button>
+      <span class="term-note" id="join-msg">// no credit card required</span>
+    </div>
+  </div>
+</div>
+
+<div class="stats" style="margin-top:60px">
+  <div class="s"><div class="s-n">&lt;300ms</div><div class="s-l">end-to-end latency</div></div>
+  <div class="s"><div class="s-n">7+</div><div class="s-l">swappable providers</div></div>
+  <div class="s"><div class="s-n">$0</div><div class="s-l">platform fee (self-hosted)</div></div>
+  <div class="s"><div class="s-n">100%</div><div class="s-l">audio on your server</div></div>
+</div>
+
+<div class="section">
+  <div class="sec-head">// pipeline stages</div>
+  <div class="pipe-vis">
+    <div class="pipe-row-item"><span class="p-idx">01</span><span class="p-name">MIC</span><span class="p-desc">Raw audio input — WebSocket stream</span><span class="p-ms">—</span><span class="p-status">● live</span></div>
+    <div class="pipe-row-item"><span class="p-idx">02</span><span class="p-name">ASR</span><span class="p-desc">Speech-to-text — Deepgram, Whisper, AssemblyAI</span><span class="p-ms">~80ms</span><span class="p-status">● live</span></div>
+    <div class="pipe-row-item"><span class="p-idx">03</span><span class="p-name">ATTS</span><span class="p-desc">Adaptive turn-taking scheduler — barge-in detection</span><span class="p-ms">~5ms</span><span class="p-status">● live</span></div>
+    <div class="pipe-row-item"><span class="p-idx">04</span><span class="p-name">LLM</span><span class="p-desc">Language model — OpenAI, Claude, Ollama, OpenRouter</span><span class="p-ms">~120ms</span><span class="p-status">● live</span></div>
+    <div class="pipe-row-item"><span class="p-idx">05</span><span class="p-name">TAB</span><span class="p-desc">Temporal alignment buffer — smooth token streaming</span><span class="p-ms">~10ms</span><span class="p-status">● live</span></div>
+    <div class="pipe-row-item"><span class="p-idx">06</span><span class="p-name">AQAL</span><span class="p-desc">Adaptive audio quality layer — codec selection</span><span class="p-ms">~5ms</span><span class="p-status">● live</span></div>
+    <div class="pipe-row-item"><span class="p-idx">07</span><span class="p-name">TTS</span><span class="p-desc">Text-to-speech — OpenAI, ElevenLabs, Azure</span><span class="p-ms">~60ms</span><span class="p-status">● live</span></div>
+    <div class="pipe-row-item"><span class="p-idx">08</span><span class="p-name">OUT</span><span class="p-desc">Audio output — PCM-16 stream to caller</span><span class="p-ms">—</span><span class="p-status">● live</span></div>
+  </div>
+</div>
+
+<div class="feat-grid">
+  <div class="feat-item"><div class="fi-tag">// 01_PROVIDER_AGNOSTIC</div><div class="fi-title">Swap providers with one env var</div><div class="fi-desc">Deepgram → Whisper. GPT-4o → Claude. OpenAI TTS → ElevenLabs. No code changes. Just set the env var and restart.</div></div>
+  <div class="feat-item"><div class="fi-tag">// 02_SELF_HOSTED</div><div class="fi-title">Your audio never leaves your server</div><div class="fi-desc">No SaaS middleman. No per-minute billing. Deploy on any VPS, Kubernetes cluster, or bare metal box you own.</div></div>
+  <div class="feat-item"><div class="fi-tag">// 03_TWILIO</div><div class="fi-title">WhatsApp + Phone calls out of the box</div><div class="fi-desc">Voice notes, PSTN calls, and WebSocket all funnel into the same pipeline. One integration, three channels.</div></div>
+  <div class="feat-item"><div class="fi-tag">// 04_OBSERVABILITY</div><div class="fi-title">Prometheus metrics built-in</div><div class="fi-desc">Every pipeline stage instrumented. Latency histograms, session counters, error rates. Plug into your existing Grafana.</div></div>
+</div>
+
+<div style="padding:80px 40px;text-align:center">
+  <p style="font-size:13px;color:var(--m);margin-bottom:24px">// early access opens in</p>
+  <div style="display:flex;gap:16px;justify-content:center;font-size:clamp(32px,5vw,64px);font-weight:700;color:#fff">
+    <span id="ct-d">14</span><span style="color:#222">:</span><span id="ct-h">00</span><span style="color:#222">:</span><span id="ct-m">00</span><span style="color:#222">:</span><span id="ct-s" style="color:var(--g)">00</span>
+  </div>
+  <p style="font-size:11px;color:#333;margin-top:8px;letter-spacing:2px">DAYS · HRS · MIN · SEC</p>
+</div>
+
+<footer>
+  <div class="logo">omnivoice<span style="color:#333">.dev</span></div>
+  <p>// open-source voice AI infrastructure · MIT license</p>
+</footer>
+
+<style>
+@keyframes fadeIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
+</style>
+<script>
+const l=new Date(Date.now()+14*864e5);
+setInterval(()=>{const d=l-Date.now(),dd=Math.floor(d/864e5),h=Math.floor(d%864e5/36e5),m=Math.floor(d%36e5/6e4),s=Math.floor(d%6e4/1e3);document.getElementById('ct-d').textContent=String(dd).padStart(2,'0');document.getElementById('ct-h').textContent=String(h).padStart(2,'0');document.getElementById('ct-m').textContent=String(m).padStart(2,'0');document.getElementById('ct-s').textContent=String(s).padStart(2,'0')},1000);
+function handleJoin(){const e=document.getElementById('em').value;if(!e)return;document.getElementById('join-msg').textContent='// ✓ added to waitlist: '+e;document.getElementById('em').value=''}
+</script>
+</body>
+</html>

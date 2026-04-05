@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+
+<!-- ── Google Search Console Verification ────────────────── -->
+<meta name="google-site-verification" content="tTa_wkA3uHIOimC_erlk30yg7uibDOSnmYKt0vncc9A"/>
+
+<!-- ── Primary SEO ─────────────────────────────────────────── -->
+<title>OmniVoice — Give Claude or GPT-4o a Voice on WhatsApp</title>
+<meta name="description" content="OmniVoice gives Claude or GPT-4o a voice on WhatsApp. Send a voice note, hear the AI speak back in under 300ms. Self-hosted, open-source, no per-minute bills."/>
+<meta name="keywords" content="voice AI, self-hosted, open source, ASR, LLM, TTS, real-time voice, voice pipeline, Jarvis AI, conversational AI, WhatsApp AI, Twilio voice AI, OpenAI voice, sub-300ms"/>
+<meta name="author" content="OmniVoice"/>
+<link rel="canonical" href="https://omnivoice.dev/"/>
+
+<!-- ── Open Graph (LinkedIn, Facebook, Slack previews) ────── -->
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://omnivoice.dev/"/>
+<meta property="og:title" content="OmniVoice — Give Claude a Voice on WhatsApp"/>
+<meta property="og:description" content="Send a WhatsApp voice note. Claude thinks. You hear the answer back in under 300ms. Self-hosted, open-source, no per-minute bills."/>
+<meta property="og:image" content="https://omnivoice.dev/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:site_name" content="OmniVoice"/>
+<meta property="og:locale" content="en_US"/>
+
+<!-- ── Twitter / X Card ───────────────────────────────────── -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@omnivoicedev"/>
+<meta name="twitter:creator" content="@omnivoicedev"/>
+<meta name="twitter:title" content="OmniVoice — Give Claude a Voice on WhatsApp"/>
+<meta name="twitter:description" content="Send a WhatsApp voice note. Claude thinks. You hear the answer back in under 300ms. Self-hosted, open-source, no per-minute bills."/>
+<meta name="twitter:image" content="https://omnivoice.dev/og-image.png"/>
+
+<!-- ── Favicon & App Icons ────────────────────────────────── -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+<link rel="manifest" href="/site.webmanifest"/>
+<meta name="theme-color" content="#f5e642"/>
+<meta name="msapplication-TileColor" content="#080808"/>
+
+<!-- ── Robots & Indexing ──────────────────────────────────── -->
+<meta name="robots" content="index, follow"/>
+
+<!-- ── JSON-LD Structured Data ───────────────────────────── -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "OmniVoice",
+  "url": "https://omnivoice.dev",
+  "description": "Give Claude or GPT-4o a voice on WhatsApp. Send a voice note, hear the AI speak back in under 300ms. Self-hosted, open-source, no per-minute bills.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Linux, macOS, Windows",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "OmniVoice",
+    "url": "https://omnivoice.dev"
+  },
+  "keywords": "voice AI, self-hosted, open source, ASR, LLM, TTS, conversational AI"
+}
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080808;
+  --s:#111;
+  --s2:#161616;
+  --b:#222;
+  --t:#e8e8e0;
+  --m:#444;
+  --m2:#666;
+  --g:#00ff88;
+  --g2:#00cc6a;
+  --y:#f5e642;
+  --r:#ff3c3c;
+  --b2:#3c8fff;
+  --mono:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth;overflow-x:hidden;max-width:100vw}
+body{background:var(--bg);color:var(--t);font-family:var(--mono);overflow-x:hidden;min-height:100vh;max-width:100vw;width:100%}
+
+/* SCANLINES */
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,255,136,.012) 3px,rgba(0,255,136,.012) 4px);pointer-events:none;z-index:9999}
+
+/* ── NAV ── */
+nav{display:flex;align-items:stretch;border-bottom:2px solid var(--b);position:sticky;top:0;z-index:100;background:rgba(8,8,8,.95);backdrop-filter:blur(10px);width:100%;overflow:hidden}
+.logo-nav{font-size:16px;font-weight:700;padding:18px 32px;border-right:2px solid var(--b);color:var(--g);letter-spacing:-1px;white-space:nowrap;flex-shrink:0}
+.logo-nav span{color:var(--m2)}
+.nav-links{display:flex;align-items:center;flex:1;padding:0 32px;gap:32px}
+.nav-links a{color:var(--m2);text-decoration:none;font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:2px;transition:color .15s}
+.nav-links a:hover{color:var(--g)}
+.nav-right{display:flex;align-items:stretch}
+.nav-gh{display:flex;align-items:center;padding:0 24px;border-left:2px solid var(--b);font-size:12px;color:var(--m2);text-decoration:none;text-transform:uppercase;letter-spacing:2px;transition:color .15s}
+.nav-gh:hover{color:var(--t)}
+.nav-cta{background:var(--y);color:#000;padding:0 28px;border:none;font-size:12px;font-weight:700;font-family:var(--mono);text-transform:uppercase;letter-spacing:2px;cursor:pointer;border-left:2px solid var(--b);transition:background .15s}
+.nav-cta:hover{background:#fff}
+
+/* ── HERO GRID ── */
+.hero{display:grid;grid-template-columns:1fr 1fr;border-bottom:2px solid var(--b);min-height:calc(100vh - 60px)}
+.hero-left{padding:56px 48px;border-right:2px solid var(--b);display:flex;flex-direction:column;justify-content:space-between}
+.hero-right{display:flex;flex-direction:column}
+
+/* left top */
+.hero-eyebrow{font-size:11px;color:var(--m2);text-transform:uppercase;letter-spacing:3px;margin-bottom:32px}
+.hero-eyebrow span{color:var(--g)}
+h1{font-size:clamp(52px,5.5vw,84px);font-weight:900;letter-spacing:-4px;line-height:.88;text-transform:uppercase;margin-bottom:32px;font-family:'Inter',sans-serif}
+h1 .y{color:var(--y)}
+h1 .g{color:var(--g)}
+h1 .r{color:var(--r)}
+.hero-desc{font-size:14px;color:var(--m2);line-height:1.8;max-width:500px;margin-bottom:40px;border-left:2px solid var(--b);padding-left:20px}
+
+/* terminal boot block */
+.boot-block{background:var(--s);border:2px solid var(--b);padding:20px 24px;margin-bottom:32px;position:relative}
+.boot-block::before{content:'SYSTEM INIT';position:absolute;top:-10px;left:16px;background:var(--bg);padding:0 8px;font-size:10px;color:var(--m2);letter-spacing:2px}
+.boot-line{display:flex;align-items:center;gap:12px;padding:3px 0;font-size:12px;opacity:0;animation:bootIn .25s ease forwards}
+.bl-key{color:var(--m2);min-width:140px}
+.bl-val{color:var(--t)}
+.bl-ok{color:var(--g);font-weight:700}
+.bl-warn{color:var(--y)}
+@keyframes bootIn{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:none}}
+
+/* waitlist form */
+/* HERO COUNTDOWN */
+.hero-countdown{display:flex;align-items:center;gap:0;border:2px solid var(--b);margin-bottom:16px}
+.hcd-label{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--m2);padding:12px 16px;border-right:2px solid var(--b);white-space:nowrap}
+.hcd-blocks{display:flex;flex:1}
+.hcd-block{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 8px;border-right:2px solid var(--b)}
+.hcd-block:last-child{border-right:none}
+.hcd-num{font-size:22px;font-weight:700;font-family:'Inter',sans-serif;color:var(--y);line-height:1}
+.hcd-unit{font-size:8px;color:var(--m2);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+
+.wl-form{display:flex;flex-direction:column;gap:0;border:2px solid var(--b)}
+.wl-form input{background:var(--s);border:none;border-bottom:2px solid var(--b);color:var(--t);padding:14px 18px;font-size:13px;font-family:var(--mono);outline:none}
+.wl-form input::placeholder{color:var(--m)}
+.wl-form input:focus{border-bottom-color:var(--g)}
+.wl-submit{display:flex}
+.wl-submit button{flex:1;background:var(--g);color:#000;border:none;padding:14px 20px;font-size:12px;font-weight:700;font-family:var(--mono);text-transform:uppercase;letter-spacing:2px;cursor:pointer;transition:background .15s}
+.wl-submit button:hover{background:#fff}
+.wl-note{padding:10px 18px;font-size:11px;color:var(--m);background:var(--s);border-top:2px solid var(--b)}
+
+/* right side: stat quadrants */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;flex:1}
+.stat-cell{padding:36px 32px;border-bottom:2px solid var(--b);border-right:2px solid var(--b);display:flex;flex-direction:column;justify-content:flex-end;transition:background .15s;cursor:default}
+.stat-cell:nth-child(2n){border-right:none}
+.stat-cell:nth-child(3),.stat-cell:nth-child(4){border-bottom:none}
+.stat-cell:hover{background:var(--s)}
+.sc-label{font-size:10px;color:var(--m2);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:12px}
+.sc-num{font-size:clamp(36px,4vw,56px);font-weight:700;line-height:1;letter-spacing:-2px;font-family:'Inter',sans-serif}
+.sc-num.g{color:var(--g)}.sc-num.y{color:var(--y)}.sc-num.r{color:var(--r)}.sc-num.b{color:var(--b2)}
+.sc-sub{font-size:11px;color:var(--m2);margin-top:6px}
+
+/* ── MARQUEE ── */
+.marquee-wrap{border-bottom:2px solid var(--b);overflow:hidden;white-space:nowrap;background:var(--y);padding:12px 0}
+.marquee-inner{display:inline-block;animation:marquee 25s linear infinite}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mt{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#000;padding:0 28px}
+.md{color:rgba(0,0,0,.25);margin:0 4px}
+
+/* ── PIPELINE ── */
+.pipeline-section{border-bottom:2px solid var(--b)}
+.section-bar{display:flex;align-items:center;justify-content:space-between;padding:18px 48px;border-bottom:2px solid var(--b);background:var(--s)}
+.sb-title{font-size:11px;text-transform:uppercase;letter-spacing:3px;color:var(--m2)}
+.sb-tag{font-size:11px;color:var(--g)}
+.pipe-table{width:100%;border-collapse:collapse}
+.pipe-table tr{border-bottom:2px solid var(--b);transition:background .15s;cursor:default}
+.pipe-table tr:last-child{border-bottom:none}
+.pipe-table tr:hover{background:var(--s)}
+.pipe-table td{padding:18px 28px;font-size:12px;vertical-align:middle}
+.pt-idx{color:var(--m);width:40px;font-size:11px}
+.pt-name{color:var(--g);font-weight:700;font-size:14px;width:80px}
+.pt-icon{font-size:18px;width:40px}
+.pt-desc{color:var(--m2);flex:1}
+.pt-providers{color:var(--m);font-size:11px;width:260px}
+.pt-ms{color:var(--y);font-weight:700;text-align:right;width:80px}
+.pt-status{width:80px;text-align:right}
+.status-dot{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--g)}
+.dot-live{width:6px;height:6px;border-radius:50%;background:var(--g);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.2}}
+
+/* ── QUICKSTART ── */
+.qs-section{display:grid;grid-template-columns:1fr 1fr;border-bottom:2px solid var(--b)}
+.qs-left{padding:48px;border-right:2px solid var(--b)}
+.qs-right{padding:48px}
+.qs-title{font-size:clamp(28px,3vw,44px);font-weight:900;letter-spacing:-2px;text-transform:uppercase;margin-bottom:16px;font-family:'Inter',sans-serif;line-height:1}
+.qs-title span{color:var(--g)}
+.qs-desc{font-size:13px;color:var(--m2);line-height:1.8;margin-bottom:32px}
+.qs-steps{display:flex;flex-direction:column;gap:0;border:2px solid var(--b)}
+.qs-step{display:flex;align-items:flex-start;gap:16px;padding:16px 20px;border-bottom:2px solid var(--b);transition:background .15s}
+.qs-step:last-child{border-bottom:none}
+.qs-step:hover{background:var(--s)}
+.qs-num{font-size:11px;color:var(--m);min-width:24px;margin-top:2px}
+.qs-step-content{}
+.qs-step-title{font-size:13px;font-weight:700;color:var(--t);margin-bottom:4px}
+.qs-step-cmd{font-size:12px;color:var(--g);background:var(--s2);padding:6px 10px;border-radius:3px;margin-top:6px;display:inline-block}
+.code-win{background:var(--s);border:2px solid var(--b);overflow:hidden}
+.cw-top{display:flex;align-items:center;gap:6px;padding:10px 16px;border-bottom:2px solid var(--b);background:var(--s2)}
+.cdot{width:9px;height:9px;border-radius:50%}
+.cdr{background:#ff5f57}.cdy{background:#febc2e}.cdg{background:#28c840}
+.cw-title{font-size:11px;color:var(--m2);margin-left:6px;text-transform:uppercase;letter-spacing:1px}
+pre{padding:24px;font-size:12px;line-height:1.9;overflow-x:auto}
+.ck{color:#c792ea}.cs{color:#c3e88d}.cf{color:#82aaff}.cv{color:#f78c6c}.cc{color:#333}.cn{color:var(--g)}.cw{color:var(--y)}
+
+/* ── FEATURES ── */
+.feat-section{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:2px solid var(--b)}
+.feat-block{padding:40px 36px;border-right:2px solid var(--b);transition:background .15s}
+.feat-block:last-child{border-right:none}
+.feat-block:hover{background:var(--s)}
+.fb-tag{font-size:10px;color:var(--m2);text-transform:uppercase;letter-spacing:2px;margin-bottom:18px;font-weight:700}
+.fb-icon{font-size:28px;margin-bottom:14px}
+.fb-title{font-size:17px;font-weight:900;letter-spacing:-.5px;color:var(--t);margin-bottom:10px;font-family:'Inter',sans-serif}
+.fb-desc{font-size:12px;color:var(--m2);line-height:1.8}
+.fb-chip{display:inline-block;margin-top:14px;font-size:10px;color:var(--g);border:1px solid var(--b);padding:3px 10px;letter-spacing:1px}
+
+/* ── COMPARE ── */
+.compare-section{border-bottom:2px solid var(--b)}
+.compare-header{padding:28px 48px;border-bottom:2px solid var(--b);display:flex;align-items:baseline;gap:20px}
+.compare-header h2{font-size:clamp(24px,3vw,40px);font-weight:900;text-transform:uppercase;letter-spacing:-1.5px;font-family:'Inter',sans-serif}
+.compare-header h2 span{color:var(--r)}
+.compare-header p{font-size:12px;color:var(--m2)}
+table{width:100%;border-collapse:collapse}
+th{padding:14px 28px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--m2);border-bottom:2px solid var(--b);border-right:2px solid var(--b)}
+th:last-child{border-right:none}
+th.ov{color:var(--g)}
+td{padding:14px 28px;font-size:13px;border-bottom:2px solid var(--b);border-right:2px solid var(--b);color:var(--m2)}
+td:first-child{color:var(--t);font-weight:600}
+td:last-child{border-right:none}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--s)}
+.ov-td{color:var(--g);font-weight:700}
+.yes{color:var(--g);font-weight:700}.no{color:var(--r)}
+
+/* ── PROVIDERS ── */
+.providers-section{border-bottom:2px solid var(--b);padding:40px 48px}
+.prov-label{font-size:10px;color:var(--m2);text-transform:uppercase;letter-spacing:3px;margin-bottom:20px}
+.prov-chips{display:flex;flex-wrap:wrap;gap:8px}
+.pchip{display:flex;align-items:center;gap:8px;padding:8px 16px;border:2px solid var(--b);font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--m2);transition:border-color .15s,color .15s;cursor:default}
+.pchip:hover{border-color:var(--g);color:var(--t)}
+.pchip-dot{width:6px;height:6px;border-radius:50%;background:var(--g)}
+
+/* ── CTA ── */
+.cta-section{display:grid;grid-template-columns:1fr 1fr}
+.cta-left{padding:60px 48px;border-right:2px solid var(--b);background:var(--y)}
+.cta-left h2{font-size:clamp(40px,5vw,68px);font-weight:900;letter-spacing:-3px;text-transform:uppercase;color:#000;line-height:.88;margin-bottom:20px;font-family:'Inter',sans-serif}
+.cta-left p{font-size:13px;color:rgba(0,0,0,.5);line-height:1.8;margin-bottom:32px;max-width:380px}
+.cta-btns{display:flex;gap:10px}
+.btn-dark{background:#000;color:var(--y);border:none;padding:14px 24px;font-size:11px;font-weight:700;font-family:var(--mono);text-transform:uppercase;letter-spacing:2px;cursor:pointer;transition:background .15s}
+.btn-dark:hover{background:#111}
+.btn-outline{background:transparent;color:#000;border:2px solid rgba(0,0,0,.3);padding:12px 22px;font-size:11px;font-weight:700;font-family:var(--mono);text-transform:uppercase;letter-spacing:2px;cursor:pointer;text-decoration:none;display:inline-block;transition:border-color .15s}
+.btn-outline:hover{border-color:#000}
+.cta-right{padding:60px 48px;display:flex;flex-direction:column;justify-content:center;gap:20px}
+.cd-label{font-size:10px;text-transform:uppercase;letter-spacing:3px;color:var(--m2)}
+.cd-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.cd-box{border:2px solid var(--b);padding:20px 12px;text-align:center;transition:border-color .15s}
+.cd-box:hover{border-color:var(--g)}
+.cdn{font-size:clamp(28px,3vw,44px);font-weight:700;font-family:'Inter',sans-serif;color:var(--y);line-height:1}
+.cdu{font-size:9px;color:var(--m2);letter-spacing:2px;text-transform:uppercase;margin-top:4px}
+.cd-note{font-size:11px;color:var(--m);border-left:2px solid var(--b);padding-left:14px}
+
+/* ── HOW IT WORKS — WhatsApp mockup ── */
+.hiw-section{border-bottom:2px solid var(--b);background:var(--s2)}
+.hiw-inner{padding:56px 48px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.hiw-text-col{display:flex;flex-direction:column;gap:20px}
+.hiw-eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:3px;color:var(--g)}
+.hiw-title{font-size:clamp(32px,3.5vw,52px);font-weight:900;letter-spacing:-2.5px;text-transform:uppercase;font-family:'Inter',sans-serif;line-height:.92}
+.hiw-title span{color:var(--g)}
+.hiw-sub{font-size:13px;color:var(--m2);line-height:1.8;border-left:2px solid var(--b);padding-left:16px}
+.hiw-steps{display:flex;flex-direction:column;gap:0;border:2px solid var(--b)}
+.hiw-step{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border-bottom:2px solid var(--b)}
+.hiw-step:last-child{border-bottom:none}
+.hiw-step-num{font-size:10px;color:var(--m2);min-width:20px;margin-top:2px}
+.hiw-step-body{}
+.hiw-step-title{font-size:12px;font-weight:700;color:var(--t);margin-bottom:2px}
+.hiw-step-desc{font-size:11px;color:var(--m2);line-height:1.6}
+.hiw-step-ms{display:inline-block;font-size:10px;color:var(--y);border:1px solid var(--b);padding:1px 7px;margin-top:4px}
+.hiw-badge{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--bg);border:2px solid var(--g)}
+.hiw-badge-icon{font-size:18px}
+.hiw-badge-text{font-size:12px;color:var(--g);font-weight:700}
+.hiw-badge-sub{font-size:10px;color:var(--m2);margin-top:1px}
+
+/* Phone mockup */
+.wa-phone-wrap{display:flex;justify-content:center;align-items:flex-start}
+.wa-phone{width:300px;border-radius:36px;border:3px solid #2a2a2a;overflow:hidden;background:#0b141a;box-shadow:0 32px 80px rgba(0,0,0,.7),0 0 0 1px #1a1a1a;flex-shrink:0}
+.wa-notch{height:28px;background:#111;display:flex;align-items:center;justify-content:center}
+.wa-notch-dot{width:10px;height:10px;border-radius:50%;background:#222;box-shadow:0 0 0 2px #333}
+/* WA header */
+.wa-header{background:#1f2c34;padding:10px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #2a3942}
+.wa-back{color:#8696a0;font-size:14px}
+.wa-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#00a884,#005c4b);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.wa-contact{flex:1;min-width:0}
+.wa-contact-name{font-size:13px;font-weight:600;color:#e9edef;font-family:'Inter',sans-serif}
+.wa-contact-status{font-size:10px;color:#8696a0}
+.wa-header-icons{color:#8696a0;font-size:13px;display:flex;gap:14px}
+/* WA chat bg */
+.wa-chat{background:#0b141a;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='1' fill='%23ffffff05'/%3E%3C/svg%3E");padding:12px 10px;display:flex;flex-direction:column;gap:6px;min-height:320px}
+/* Date chip */
+.wa-date{align-self:center;background:#1f2c34;color:#8696a0;font-size:10px;padding:4px 10px;border-radius:8px;font-family:'Inter',sans-serif;margin-bottom:4px}
+/* Bubbles */
+.wa-bubble{max-width:220px;border-radius:8px;padding:8px 10px;position:relative;opacity:0;transform:translateY(8px)}
+.wa-bubble.out{align-self:flex-end;background:#005c4b;border-radius:8px 0 8px 8px;animation:bubbleIn .4s ease forwards}
+.wa-bubble.in{align-self:flex-start;background:#1f2c34;border-radius:0 8px 8px 8px;animation:bubbleIn .4s ease forwards}
+.wa-bubble.typing-bubble{align-self:flex-start;background:#1f2c34;border-radius:0 8px 8px 8px;animation:bubbleIn .3s ease forwards}
+@keyframes bubbleIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+/* Voice note inside bubble */
+.wa-voice{display:flex;align-items:center;gap:8px;padding:2px 0}
+.wa-play{width:32px;height:32px;border-radius:50%;background:#00a884;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer}
+.wa-play-icon{color:#fff;font-size:11px;margin-left:2px}
+.wa-waveform{display:flex;align-items:center;gap:2px;height:28px;flex:1}
+.wa-bar{width:3px;border-radius:2px;background:#8696a0}
+.wa-bubble.out .wa-bar{background:#7bb3a8}
+.wa-bar.active{background:#00a884}
+.wa-bubble.out .wa-bar.active{background:#25d366}
+.wa-dur{font-size:10px;color:#8696a0;white-space:nowrap;font-family:'Inter',sans-serif}
+.wa-bubble.out .wa-dur{color:#7bb3a8}
+/* Tick & time row */
+.wa-meta{display:flex;align-items:center;justify-content:flex-end;gap:4px;margin-top:4px}
+.wa-time{font-size:10px;color:#8696a0;font-family:'Inter',sans-serif}
+.wa-bubble.out .wa-time{color:#7bb3a8}
+.wa-ticks{color:#53bdeb;font-size:11px}
+/* Typing indicator */
+.wa-typing{display:flex;align-items:center;gap:3px;padding:4px 2px}
+.wa-typing span{width:6px;height:6px;border-radius:50%;background:#8696a0;display:inline-block;animation:typingDot 1.2s ease-in-out infinite}
+.wa-typing span:nth-child(2){animation-delay:.2s}
+.wa-typing span:nth-child(3){animation-delay:.4s}
+@keyframes typingDot{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-4px)}}
+/* Pipeline strip below phone */
+.wa-pipeline-strip{background:#1f2c34;padding:10px 14px;border-top:1px solid #2a3942;display:flex;align-items:center;gap:0}
+.wps-stage{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 4px;border-right:1px solid #2a3942}
+.wps-stage:last-child{border-right:none}
+.wps-icon{font-size:14px}
+.wps-label{font-size:8px;color:#8696a0;text-transform:uppercase;letter-spacing:.5px;font-family:'Inter',sans-serif}
+.wps-ms{font-size:9px;color:#25d366;font-weight:700;font-family:'Inter',sans-serif}
+/* Bottom bar of phone */
+.wa-bottom-bar{height:20px;background:#111;display:flex;align-items:center;justify-content:center}
+.wa-home-bar{width:60px;height:4px;background:#333;border-radius:2px}
+
+/* ── GIVE CLAUDE A VOICE ── */
+.voice-for-section{border-bottom:2px solid var(--b)}
+.vf-header{padding:28px 48px;border-bottom:2px solid var(--b);display:flex;align-items:baseline;gap:20px;flex-wrap:wrap}
+.vf-header h2{font-size:clamp(24px,3vw,40px);font-weight:900;text-transform:uppercase;letter-spacing:-1.5px;font-family:'Inter',sans-serif}
+.vf-header h2 span{color:var(--y)}
+.vf-header p{font-size:12px;color:var(--m2)}
+.vf-cards{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:2px solid var(--b)}
+.vf-card{padding:36px 32px;border-right:2px solid var(--b);display:flex;flex-direction:column;gap:16px;transition:background .15s}
+.vf-card:last-child{border-right:none}
+.vf-card:hover{background:var(--s)}
+.vf-logo{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.vf-logo-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.vf-logo-name{font-size:13px;font-weight:700;color:var(--t);text-transform:uppercase;letter-spacing:1px}
+.vf-logo-badge{font-size:9px;color:var(--g);border:1px solid var(--b);padding:2px 7px;letter-spacing:1px;text-transform:uppercase}
+.vf-desc{font-size:12px;color:var(--m2);line-height:1.7}
+.vf-code{background:var(--s2);border:2px solid var(--b);padding:14px 16px;font-size:11px;line-height:1.8}
+.vf-code .ck{color:#c792ea}.vf-code .cv{color:#f78c6c}.vf-code .cs{color:#c3e88d}.vf-code .cn{color:var(--g)}.vf-code .cm{color:var(--m2)}
+.vf-result{display:flex;align-items:center;gap:8px;padding:10px 14px;border:2px solid var(--g);font-size:11px;color:var(--g);font-weight:700}
+.vf-result-dot{width:6px;height:6px;border-radius:50%;background:var(--g);animation:pulse 2s infinite;flex-shrink:0}
+.vf-bottom{padding:20px 48px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.vf-bottom-text{font-size:12px;color:var(--m2);flex:1;min-width:200px}
+.vf-bottom-text strong{color:var(--t)}
+.vf-arch-chip{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--m2);border:2px solid var(--b);padding:8px 16px}
+.vf-arch-chip span{color:var(--y);font-weight:700}
+
+/* ── FOOTER ── */
+footer{border-top:2px solid var(--b);display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;padding:22px 48px}
+.logo-f{font-size:15px;font-weight:700;color:var(--g);letter-spacing:-1px}
+.logo-f span{color:var(--m2)}
+footer p{font-size:11px;color:var(--m2);text-align:center;text-transform:uppercase;letter-spacing:1.5px}
+footer .fr{text-align:right}
+
+/* ── MOBILE MENU ── */
+.nav-hamburger{display:none;background:none;border:none;color:var(--t);font-size:18px;padding:0 16px;cursor:pointer;border-left:2px solid var(--b);height:100%}
+.mobile-menu{display:none;flex-direction:column;background:var(--s);border-bottom:2px solid var(--b);position:sticky;top:60px;z-index:99}
+.mobile-menu a{color:var(--m2);text-decoration:none;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;padding:16px 20px;border-bottom:1px solid var(--b);transition:color .15s,background .15s}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu a:hover{color:var(--g);background:var(--s2)}
+.mobile-menu.open{display:flex}
+@media(max-width:520px){
+  .nav-hamburger{display:flex;align-items:center}
+}
+
+/* ── SCROLL OFFSET for sticky nav ── */
+#pipeline,#quickstart,#compare,#providers,#features,#howit,#voicefor{scroll-margin-top:68px}
+
+/* ── FADE IN ── */
+.fade{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
+.fade.in{opacity:1;transform:none}
+
+/* ── RESPONSIVE: TABLET ── */
+@media(max-width:900px){
+  .hero,.qs-section,.cta-section{grid-template-columns:1fr}
+  .hero-left,.qs-left{border-right:none;border-bottom:2px solid var(--b)}
+  .stat-grid{grid-template-columns:1fr 1fr}
+  .stat-cell:nth-child(2){border-right:none}
+  .stat-cell:nth-child(3){border-bottom:2px solid var(--b)}
+  .feat-section{grid-template-columns:1fr}
+  .feat-block{border-right:none;border-bottom:2px solid var(--b)}
+  .feat-block:last-child{border-bottom:none}
+  .compare-header{flex-direction:column;gap:8px}
+  nav .nav-links{display:none}
+  footer{grid-template-columns:1fr;gap:8px;text-align:center}
+  footer .fr{text-align:center}
+  .hiw-inner{grid-template-columns:1fr}
+  .vf-cards{grid-template-columns:1fr}
+  .vf-card{border-right:none;border-bottom:2px solid var(--b)}
+  .vf-card:last-child{border-bottom:none}
+}
+
+/* ── RESPONSIVE: MOBILE (iPhone) ── */
+@media(max-width:520px){
+  /* Prevent ALL overflow */
+  *{max-width:100%;box-sizing:border-box}
+
+  /* Nav */
+  nav{flex-wrap:nowrap;width:100%}
+  .logo-nav{padding:14px 16px;font-size:13px;flex-shrink:0}
+  .nav-links{display:none}
+  .nav-gh{display:none}
+  .nav-right{flex-shrink:0}
+  .nav-cta{padding:0 14px;font-size:10px;letter-spacing:1px}
+
+  /* Hero */
+  .hero{min-height:auto;width:100%}
+  .hero-left{padding:24px 16px;width:100%;box-sizing:border-box}
+  .hero-right{width:100%}
+  h1{font-size:clamp(36px,10vw,52px);letter-spacing:-2px;word-break:break-word}
+  .hero-desc{font-size:12px;margin-bottom:24px;max-width:100%}
+  .hero-eyebrow{margin-bottom:16px;font-size:10px}
+
+  /* Boot block */
+  .boot-block{overflow-x:auto;padding:14px 16px}
+  .boot-line{font-size:11px;gap:8px}
+  .bl-key{min-width:100px;font-size:10px}
+  .bl-val,.bl-ok,.bl-warn{font-size:10px}
+
+  /* Hero countdown */
+  .hero-countdown{flex-direction:row;width:100%}
+  .hcd-label{display:none}
+  .hcd-blocks{width:100%}
+  .hcd-block{padding:8px 4px}
+  .hcd-num{font-size:20px}
+  .hcd-unit{font-size:7px}
+
+  /* Waitlist form */
+  .wl-form{width:100%;margin-bottom:4px}
+  .wl-form input{font-size:12px;padding:12px 14px;width:100%;box-sizing:border-box}
+  .wl-submit{width:100%}
+  .wl-submit button{width:100%;font-size:10px;letter-spacing:1px;padding:14px 8px;white-space:normal;line-height:1.3}
+  .wl-note{font-size:10px;padding:8px 12px;line-height:1.6;word-break:break-word}
+
+  /* Stat grid */
+  .stat-grid{grid-template-columns:1fr 1fr;width:100%}
+  .stat-cell{padding:20px 14px}
+  .sc-num{font-size:clamp(26px,8vw,38px)}
+  .sc-label{font-size:9px;letter-spacing:1.5px}
+  .sc-sub{font-size:10px}
+
+  /* Section bars */
+  .section-bar{padding:12px 16px}
+  .sb-title{font-size:10px}
+
+  /* Pipeline table — scrollable */
+  .pipeline-section{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .pipe-table{min-width:520px}
+  .pipe-table td{padding:14px 16px;font-size:11px}
+
+  /* Quickstart */
+  .qs-section{grid-template-columns:1fr}
+  .qs-left{padding:24px 16px;border-right:none;border-bottom:2px solid var(--b)}
+  .qs-right{padding:24px 16px}
+  .qs-title{font-size:clamp(22px,7vw,32px)}
+  pre{font-size:10px;padding:14px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .code-win{overflow:hidden}
+
+  /* Features */
+  .feat-block{padding:24px 16px}
+  .fb-title{font-size:15px}
+
+  /* Compare table — scrollable */
+  .compare-section{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .compare-header{padding:16px 16px;flex-direction:column;gap:6px}
+  .compare-header h2{font-size:clamp(18px,6vw,28px)}
+  table{min-width:480px}
+  th,td{padding:10px 12px;font-size:10px}
+
+  /* Providers */
+  .providers-section{padding:24px 16px}
+  .pchip{padding:6px 12px;font-size:10px}
+
+  /* CTA */
+  .cta-section{grid-template-columns:1fr}
+  .cta-left{padding:32px 16px;border-right:none;border-bottom:2px solid var(--b)}
+  .cta-left h2{font-size:clamp(34px,9vw,52px);letter-spacing:-2px}
+  .cta-left p{font-size:12px}
+  .cta-btns{flex-direction:column;gap:8px}
+  .btn-dark,.btn-outline{width:100%;text-align:center;padding:14px 16px;box-sizing:border-box}
+  .cta-right{padding:32px 16px}
+  .cd-row{grid-template-columns:repeat(4,1fr);gap:4px}
+  .cdn{font-size:clamp(20px,6vw,32px)}
+  .cdu{font-size:8px}
+
+  /* How It Works */
+  .hiw-inner{padding:28px 16px;grid-template-columns:1fr;gap:32px}
+  .wa-phone{width:260px}
+  .wa-chat{min-height:260px}
+
+  /* Give Claude a Voice */
+  .vf-header{padding:16px 16px;gap:6px}
+  .vf-header h2{font-size:clamp(18px,6vw,28px)}
+  .vf-cards{grid-template-columns:1fr}
+  .vf-card{border-right:none;border-bottom:2px solid var(--b);padding:24px 16px}
+  .vf-card:last-child{border-bottom:none}
+  .vf-bottom{padding:16px}
+
+  /* Footer */
+  footer{padding:20px 16px;grid-template-columns:1fr;gap:10px;text-align:center}
+  footer .fr{text-align:center}
+  footer p{font-size:10px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo-nav">OMNI<span>VOICE</span></div>
+  <div class="nav-links">
+    <a href="#pipeline">PIPELINE</a>
+    <a href="#quickstart">QUICKSTART</a>
+    <a href="#compare">COMPARE</a>
+    <a href="#providers">PROVIDERS</a>
+  </div>
+  <div class="nav-right">
+    <a class="nav-gh" href="#" onclick="placeholder(event)">★ GITHUB</a>
+    <button class="nav-cta" onclick="scrollToWaitlist()">JOIN WAITLIST</button>
+    <!-- Mobile hamburger -->
+    <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Menu">&#9776;</button>
+  </div>
+</nav>
+<!-- Mobile dropdown menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#pipeline" onclick="closeMobileMenu()">// PIPELINE</a>
+  <a href="#quickstart" onclick="closeMobileMenu()">// QUICKSTART</a>
+  <a href="#compare" onclick="closeMobileMenu()">// COMPARE</a>
+  <a href="#providers" onclick="closeMobileMenu()">// PROVIDERS</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div>
+      <div class="hero-eyebrow">Voice layer for Claude &amp; GPT-4o &nbsp;·&nbsp; <span>On WhatsApp · Self-hosted</span></div>
+      <h1>YOUR AI.<br/><span class="y">NOW IT</span><br/><span class="g">TALKS BACK.</span></h1>
+      <p class="hero-desc">Send a WhatsApp voice note. Claude hears it, thinks, and speaks back in under 300ms. No SaaS middleman. No $0.31/min bill. Your server, your audio, your AI.</p>
+
+      <!-- BOOT SEQUENCE -->
+      <div class="boot-block">
+        <div class="boot-line" style="animation-delay:.2s"><span class="bl-key">platform</span><span class="bl-val">OmniVoice v0.1.0</span></div>
+        <div class="boot-line" style="animation-delay:.5s"><span class="bl-key">channel</span><span class="bl-val">whatsapp &nbsp;<span class="bl-ok">[ CONNECTED ]</span></span></div>
+        <div class="boot-line" style="animation-delay:.8s"><span class="bl-key">llm_provider</span><span class="bl-val">anthropic/claude-3.5-sonnet &nbsp;<span class="bl-ok">[ OK ]</span></span></div>
+        <div class="boot-line" style="animation-delay:1.1s"><span class="bl-key">asr_provider</span><span class="bl-val">deepgram/nova-2 &nbsp;<span class="bl-ok">[ OK ]</span></span></div>
+        <div class="boot-line" style="animation-delay:1.4s"><span class="bl-key">latency_p50</span><span class="bl-val" style="color:var(--g)">247ms</span></div>
+        <div class="boot-line" style="animation-delay:1.7s"><span class="bl-key">audio_leaves_server</span><span class="bl-val" style="color:var(--r)">false &nbsp;<span class="bl-ok">[ GOOD ]</span></span></div>
+        <div class="boot-line" style="animation-delay:2.0s"><span class="bl-key">status</span><span class="bl-val" style="color:var(--g);font-weight:700">READY. Send a voice note to get started.</span></div>
+      </div>
+    </div>
+
+    <!-- HERO COUNTDOWN -->
+    <div class="hero-countdown">
+      <span class="hcd-label">// Launching in</span>
+      <div class="hcd-blocks">
+        <div class="hcd-block"><div class="hcd-num" id="hd">14</div><div class="hcd-unit">days</div></div>
+        <div class="hcd-block"><div class="hcd-num" id="hh">00</div><div class="hcd-unit">hrs</div></div>
+        <div class="hcd-block"><div class="hcd-num" id="hm">00</div><div class="hcd-unit">min</div></div>
+        <div class="hcd-block"><div class="hcd-num" id="hs">00</div><div class="hcd-unit">sec</div></div>
+      </div>
+    </div>
+
+    <!-- WAITLIST -->
+    <div class="wl-form">
+      <input type="email" id="email" placeholder="$ enter_email: your@company.com"/>
+      <div class="wl-submit">
+        <button onclick="joinWaitlist()">./join_waitlist --early-access</button>
+      </div>
+      <div class="wl-note" id="wl-note">// no credit card · no vendor lock-in · just the pipeline</div>
+    </div>
+  </div>
+
+  <!-- STATS GRID -->
+  <div class="hero-right">
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="sc-label">End-to-end latency</div>
+        <div class="sc-num g">&lt;300ms</div>
+        <div class="sc-sub">p50 avg across ASR+LLM+TTS</div>
+      </div>
+      <div class="stat-cell">
+        <div class="sc-label">Platform fee (self-hosted)</div>
+        <div class="sc-num y">$0</div>
+        <div class="sc-sub">Own infra, zero platform tax</div>
+      </div>
+      <div class="stat-cell">
+        <div class="sc-label">WhatsApp users worldwide</div>
+        <div class="sc-num b">2B+</div>
+        <div class="sc-sub">No app download. They're already there.</div>
+      </div>
+      <div class="stat-cell">
+        <div class="sc-label">License</div>
+        <div class="sc-num r">MIT</div>
+        <div class="sc-sub">Fork it. Ship it. Own it.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span class="mt">CLAUDE ON WHATSAPP</span><span class="md">◆</span>
+    <span class="mt">SELF-HOSTED</span><span class="md">◆</span>
+    <span class="mt">2B+ USERS. NO APP DOWNLOAD</span><span class="md">◆</span>
+    <span class="mt">OPEN SOURCE</span><span class="md">◆</span>
+    <span class="mt">SUB-300MS VOICE ROUND-TRIP</span><span class="md">◆</span>
+    <span class="mt">NO $0.31/MIN BILL</span><span class="md">◆</span>
+    <span class="mt">GPT-4O ON WHATSAPP</span><span class="md">◆</span>
+    <span class="mt">AUDIO ON YOUR SERVER</span><span class="md">◆</span>
+    <span class="mt">CLAUDE ON WHATSAPP</span><span class="md">◆</span>
+    <span class="mt">SELF-HOSTED</span><span class="md">◆</span>
+    <span class="mt">2B+ USERS. NO APP DOWNLOAD</span><span class="md">◆</span>
+    <span class="mt">OPEN SOURCE</span><span class="md">◆</span>
+    <span class="mt">SUB-300MS VOICE ROUND-TRIP</span><span class="md">◆</span>
+    <span class="mt">NO $0.31/MIN BILL</span><span class="md">◆</span>
+    <span class="mt">GPT-4O ON WHATSAPP</span><span class="md">◆</span>
+    <span class="mt">AUDIO ON YOUR SERVER</span><span class="md">◆</span>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="hiw-section fade" id="howit">
+  <div class="hiw-inner">
+
+    <!-- Left: text + steps -->
+    <div class="hiw-text-col">
+      <div class="hiw-eyebrow">// How it works</div>
+      <div class="hiw-title">SEND A NOTE.<br/>HEAR AN <span>ANSWER.</span></div>
+      <div class="hiw-sub">You send a WhatsApp voice note. OmniVoice transcribes it, runs it through Claude or GPT-4o, and sends a voice note back. All under 300ms.</div>
+
+      <div class="hiw-steps">
+        <div class="hiw-step">
+          <span class="hiw-step-num">01</span>
+          <div class="hiw-step-body">
+            <div class="hiw-step-title">🎙 You send a voice note</div>
+            <div class="hiw-step-desc">Record anything — question, task, command. Just like messaging a friend.</div>
+          </div>
+        </div>
+        <div class="hiw-step">
+          <span class="hiw-step-num">02</span>
+          <div class="hiw-step-body">
+            <div class="hiw-step-title">👂 Deepgram transcribes it</div>
+            <div class="hiw-step-desc">Speech-to-text in ~80ms. Nova-2 model. Handles accents, noise, fast speech.</div>
+            <span class="hiw-step-ms">~80ms</span>
+          </div>
+        </div>
+        <div class="hiw-step">
+          <span class="hiw-step-num">03</span>
+          <div class="hiw-step-body">
+            <div class="hiw-step-title">🧠 Claude / GPT-4o replies</div>
+            <div class="hiw-step-desc">Your chosen LLM thinks and streams a response. Swap providers in one env var.</div>
+            <span class="hiw-step-ms">~120ms</span>
+          </div>
+        </div>
+        <div class="hiw-step">
+          <span class="hiw-step-num">04</span>
+          <div class="hiw-step-body">
+            <div class="hiw-step-title">🔊 You receive a voice note back</div>
+            <div class="hiw-step-desc">TTS converts the reply to audio. Delivered as a WhatsApp voice note.</div>
+            <span class="hiw-step-ms">~60ms</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hiw-badge">
+        <div class="hiw-badge-icon">⚡</div>
+        <div>
+          <div class="hiw-badge-text">Total round-trip &lt; 300ms</div>
+          <div class="hiw-badge-sub">Fully self-hosted · your audio never leaves your server</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: WhatsApp phone mockup -->
+    <div class="wa-phone-wrap">
+      <div class="wa-phone">
+        <!-- Notch -->
+        <div class="wa-notch"><div class="wa-notch-dot"></div></div>
+
+        <!-- WA Header -->
+        <div class="wa-header">
+          <span class="wa-back">‹</span>
+          <div class="wa-avatar">🤖</div>
+          <div class="wa-contact">
+            <div class="wa-contact-name">OmniVoice AI</div>
+            <div class="wa-contact-status" id="wa-status">online</div>
+          </div>
+          <div class="wa-header-icons"><span>📞</span><span>⋮</span></div>
+        </div>
+
+        <!-- Chat -->
+        <div class="wa-chat" id="wa-chat">
+          <div class="wa-date">Today</div>
+
+          <!-- User sends voice note (animates in first) -->
+          <div class="wa-bubble out" id="wa-b1" style="animation-delay:0.6s">
+            <div class="wa-voice">
+              <div class="wa-play"><span class="wa-play-icon">▶</span></div>
+              <div class="wa-waveform">
+                <div class="wa-bar" style="height:8px"></div><div class="wa-bar" style="height:16px"></div><div class="wa-bar" style="height:12px"></div><div class="wa-bar" style="height:20px"></div><div class="wa-bar" style="height:10px"></div><div class="wa-bar" style="height:18px"></div><div class="wa-bar" style="height:14px"></div><div class="wa-bar" style="height:22px"></div><div class="wa-bar" style="height:8px"></div><div class="wa-bar" style="height:16px"></div><div class="wa-bar" style="height:20px"></div><div class="wa-bar" style="height:12px"></div><div class="wa-bar" style="height:18px"></div><div class="wa-bar" style="height:10px"></div><div class="wa-bar" style="height:14px"></div>
+              </div>
+              <span class="wa-dur">0:04</span>
+            </div>
+            <div class="wa-meta"><span class="wa-time">10:42 am</span><span class="wa-ticks">✓✓</span></div>
+          </div>
+
+          <!-- Typing indicator (shows then hides) -->
+          <div class="wa-bubble typing-bubble" id="wa-typing" style="animation-delay:1.4s;display:none">
+            <div class="wa-typing"><span></span><span></span><span></span></div>
+          </div>
+
+          <!-- AI voice note reply (animates in after typing) -->
+          <div class="wa-bubble in" id="wa-b2" style="display:none">
+            <div class="wa-voice">
+              <div class="wa-play"><span class="wa-play-icon">▶</span></div>
+              <div class="wa-waveform">
+                <div class="wa-bar active" style="height:10px"></div><div class="wa-bar active" style="height:18px"></div><div class="wa-bar active" style="height:14px"></div><div class="wa-bar active" style="height:22px"></div><div class="wa-bar" style="height:9px"></div><div class="wa-bar active" style="height:17px"></div><div class="wa-bar active" style="height:20px"></div><div class="wa-bar" style="height:11px"></div><div class="wa-bar active" style="height:16px"></div><div class="wa-bar" style="height:8px"></div><div class="wa-bar active" style="height:19px"></div><div class="wa-bar" style="height:13px"></div><div class="wa-bar active" style="height:21px"></div><div class="wa-bar" style="height:10px"></div><div class="wa-bar active" style="height:15px"></div>
+              </div>
+              <span class="wa-dur">0:06</span>
+            </div>
+            <div class="wa-meta"><span class="wa-time">10:42 am</span></div>
+          </div>
+        </div>
+
+        <!-- Pipeline strip at bottom of phone -->
+        <div class="wa-pipeline-strip">
+          <div class="wps-stage"><span class="wps-icon">👂</span><span class="wps-label">ASR</span><span class="wps-ms">80ms</span></div>
+          <div class="wps-stage"><span class="wps-icon">🧠</span><span class="wps-label">LLM</span><span class="wps-ms">120ms</span></div>
+          <div class="wps-stage"><span class="wps-icon">🔊</span><span class="wps-label">TTS</span><span class="wps-ms">60ms</span></div>
+          <div class="wps-stage"><span class="wps-icon">⚡</span><span class="wps-label">Total</span><span class="wps-ms">&lt;300ms</span></div>
+        </div>
+
+        <!-- Home bar -->
+        <div class="wa-bottom-bar"><div class="wa-home-bar"></div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PIPELINE -->
+<div class="pipeline-section fade" id="pipeline">
+  <div class="section-bar">
+    <span class="sb-title">// Pipeline Architecture</span>
+    <span class="sb-tag">8 stages · each independently swappable · total ~247ms</span>
+  </div>
+  <table class="pipe-table">
+    <tbody>
+      <tr><td class="pt-idx">01</td><td class="pt-icon">🎙️</td><td class="pt-name">MIC</td><td class="pt-desc">Raw audio input via WebSocket stream</td><td class="pt-providers">client WebSocket</td><td class="pt-ms">—</td><td class="pt-status"><span class="status-dot"><span class="dot-live"></span>LIVE</span></td></tr>
+      <tr><td class="pt-idx">02</td><td class="pt-icon">👂</td><td class="pt-name">ASR</td><td class="pt-desc">Speech-to-text transcription</td><td class="pt-providers">Deepgram · Whisper · AssemblyAI</td><td class="pt-ms">~80ms</td><td class="pt-status"><span class="status-dot"><span class="dot-live"></span>LIVE</span></td></tr>
+      <tr><td class="pt-idx">03</td><td class="pt-icon">⚡</td><td class="pt-name">ATTS</td><td class="pt-desc">Adaptive turn-taking & barge-in detection</td><td class="pt-providers">built-in</td><td class="pt-ms">~5ms</td><td class="pt-status"><span class="status-dot"><span class="dot-live"></span>LIVE</span></td></tr>
+      <tr><td class="pt-idx">04</td><td class="pt-icon">🧠</td><td class="pt-name">LLM</td><td class="pt-desc">Language model inference & streaming</td><td class="pt-providers">OpenAI · Claude · Ollama · OpenRouter</td><td class="pt-ms">~120ms</td><td class="pt-status"><span class="status-dot"><span class="dot-live"></span>LIVE</span></td></tr>
+      <tr><td class="pt-idx">05</td><td class="pt-icon">🪣</td><td class="pt-name">TAB</td><td class="pt-desc">Temporal alignment buffer — smooth token rate</td><td class="pt-providers">built-in</td><td class="pt-ms">~10ms</td><td class="pt-status"><span class="status-dot"><span class="dot-live"></span>LIVE</span></td></tr>
+      <tr><td class="pt-idx">06</td><td class="pt-icon">📡</td><td class="pt-name">AQAL</td><td class="pt-desc">Adaptive audio quality & codec selection</td><td class="pt-providers">built-in</td><td class="pt-ms">~5ms</td><td class="pt-status"><span class="status-dot"><span class="dot-live"></span>LIVE</span></td></tr>
+      <tr><td class="pt-idx">07</td><td class="pt-icon">🔊</td><td class="pt-name">TTS</td><td class="pt-desc">Text-to-speech synthesis</td><td class="pt-providers">OpenAI · ElevenLabs · Azure</td><td class="pt-ms">~60ms</td><td class="pt-status"><span class="status-dot"><span class="dot-live"></span>LIVE</span></td></tr>
+      <tr><td class="pt-idx">08</td><td class="pt-icon">🎧</td><td class="pt-name">OUT</td><td class="pt-desc">PCM-16 audio stream back to caller</td><td class="pt-providers">client WebSocket</td><td class="pt-ms">—</td><td class="pt-status"><span class="status-dot"><span class="dot-live"></span>LIVE</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- QUICKSTART -->
+<div class="qs-section fade" id="quickstart">
+  <div class="qs-left">
+    <div class="qs-title">RUNNING IN<br/><span>60 SECONDS.</span></div>
+    <p class="qs-desc">Clone, set two env vars, start. Your first voice session is one WebSocket connection away.</p>
+    <div class="qs-steps">
+      <div class="qs-step">
+        <span class="qs-num">01</span>
+        <div class="qs-step-content">
+          <div class="qs-step-title">Clone and install</div>
+          <span class="qs-step-cmd">git clone + pip install -r requirements.txt</span>
+        </div>
+      </div>
+      <div class="qs-step">
+        <span class="qs-num">02</span>
+        <div class="qs-step-content">
+          <div class="qs-step-title">Run the setup wizard</div>
+          <span class="qs-step-cmd">python setup_env.py</span>
+        </div>
+      </div>
+      <div class="qs-step">
+        <span class="qs-num">03</span>
+        <div class="qs-step-content">
+          <div class="qs-step-title">Pick your LLM — Claude, GPT-4o, or Ollama</div>
+          <span class="qs-step-cmd">LLM_PROVIDER=anthropic / openai / ollama</span>
+        </div>
+      </div>
+      <div class="qs-step">
+        <span class="qs-num">04</span>
+        <div class="qs-step-content">
+          <div class="qs-step-title">Start everything in one command</div>
+          <span class="qs-step-cmd">python start.py</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="qs-right">
+    <div class="code-win">
+      <div class="cw-top">
+        <div class="cdot cdr"></div><div class="cdot cdy"></div><div class="cdot cdg"></div>
+        <span class="cw-title">terminal — omni-voice</span>
+      </div>
+      <pre><span class="cc"># 1. clone &amp; install</span>
+<span class="cf">git</span> clone https://github.com/yourname/omnivoice
+<span class="cf">cd</span> omnivoice &amp;&amp; pip install -r requirements.txt
+
+<span class="cc"># 2. guided setup — picks your providers</span>
+<span class="cf">python</span> setup_env.py
+
+<span class="cc"># choose your LLM (pick one):</span>
+<span class="cv">LLM_PROVIDER</span>=anthropic   <span class="cc">→ Claude  (ANTHROPIC_API_KEY)</span>
+<span class="cv">LLM_PROVIDER</span>=openai      <span class="cc">→ GPT-4o  (OPENAI_API_KEY)</span>
+<span class="cv">LLM_PROVIDER</span>=ollama      <span class="cc">→ Llama3  (no key needed)</span>
+
+<span class="cc"># ASR &amp; TTS — both have free options:</span>
+<span class="cv">ASR_PROVIDER</span>=whisper     <span class="cc">→ local, free, no key</span>
+<span class="cv">TTS_PROVIDER</span>=edge        <span class="cc">→ free Microsoft neural voices</span>
+
+<span class="cc"># 3. start everything</span>
+<span class="cf">python</span> start.py
+
+<span class="cn">✓ Tunnel active: https://xxx.trycloudflare.com</span>
+<span class="cn">✓ Twilio webhook updated automatically</span>
+<span class="cn">✓ OmniVoice ready — send a WhatsApp voice note</span>
+<span class="cw">▌</span></pre>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="feat-section fade">
+  <div class="feat-block">
+    <div class="fb-tag">// 01_PROVIDER_AGNOSTIC</div>
+    <div class="fb-icon">🔌</div>
+    <div class="fb-title">One env var. Any provider.</div>
+    <div class="fb-desc">Deepgram → Whisper. GPT-4o → Claude. OpenAI TTS → ElevenLabs. One env var change, no code rewrite. Provider lock-in is a choice — choose freedom.</div>
+    <span class="fb-chip">ASR · LLM · TTS</span>
+  </div>
+  <div class="feat-block">
+    <div class="fb-tag">// 02_MULTI_CHANNEL</div>
+    <div class="fb-icon">📱</div>
+    <div class="fb-title">WhatsApp. Phone. Web.</div>
+    <div class="fb-desc">Twilio integration built-in. Voice notes go through ASR→LLM→TTS and come back as audio. Phone calls are real-time bidirectional streams. Three channels, one pipeline.</div>
+    <span class="fb-chip">Twilio · WebSocket · PSTN</span>
+  </div>
+  <div class="feat-block">
+    <div class="fb-tag">// 03_SELF_HOSTED</div>
+    <div class="fb-icon">🔒</div>
+    <div class="fb-title">Your server. Your audio.</div>
+    <div class="fb-desc">No SaaS middleman listening to your users. No $0.31/min surprise bills. Deploy on any VPS, k8s cluster, or bare metal you already own and trust.</div>
+    <span class="fb-chip">Open source · MIT · Self-hosted</span>
+  </div>
+  <div class="feat-block">
+    <div class="fb-tag">// 04_LATENCY</div>
+    <div class="fb-icon">⚡</div>
+    <div class="fb-title">Sub-300ms. Every call.</div>
+    <div class="fb-desc">TAB smooths bursty LLM tokens into natural speech rhythm. ATTS detects barge-in in real time. Conversations feel like conversations, not HTTP requests.</div>
+    <span class="fb-chip">TAB · ATTS · AQAL</span>
+  </div>
+  <div class="feat-block">
+    <div class="fb-tag">// 05_OBSERVABILITY</div>
+    <div class="fb-icon">📊</div>
+    <div class="fb-title">Built-in Prometheus.</div>
+    <div class="fb-desc">Every pipeline stage instrumented out of the box. Latency histograms, session counters, error rates — ready for your Grafana dashboard. No config needed.</div>
+    <span class="fb-chip">Prometheus · Grafana</span>
+  </div>
+  <div class="feat-block">
+    <div class="fb-tag">// 06_OPEN_SOURCE</div>
+    <div class="fb-icon">⭐</div>
+    <div class="fb-title">MIT. Fork it. Own it.</div>
+    <div class="fb-desc">The full pipeline is open source. Read the code, extend it, ship it. Or use the hosted cloud on omnivoice.dev if you don't want to run infra. Your call.</div>
+    <span class="fb-chip">MIT License · GitHub</span>
+  </div>
+</div>
+
+<!-- GIVE CLAUDE / OPENAI A VOICE -->
+<div class="voice-for-section fade" id="voicefor">
+  <div class="vf-header">
+    <h2>GIVE YOUR AI <span>A VOICE.</span></h2>
+    <p>// OmniVoice is the voice layer. You pick the brain. One env var to swap.</p>
+  </div>
+  <div class="vf-cards">
+
+    <!-- Claude -->
+    <div class="vf-card">
+      <div class="vf-logo">
+        <div class="vf-logo-dot" style="background:#c97a3a"></div>
+        <span class="vf-logo-name">Claude</span>
+        <span class="vf-logo-badge">Anthropic</span>
+      </div>
+      <div class="vf-desc">Use your Anthropic API key directly — no middleman. Every voice conversation goes through Claude 3.5 Sonnet, speaking and listening.</div>
+      <div class="vf-code">
+<span class="cm"># .env — one key, direct to Anthropic</span>
+<span class="cv">LLM_PROVIDER</span>=<span class="cs">anthropic</span>
+<span class="cv">ANTHROPIC_API_KEY</span>=<span class="cs">sk-ant-...</span>
+<span class="cv">ANTHROPIC_MODEL</span>=<span class="cs">claude-3-5-sonnet-20241022</span>
+<span class="cv">TTS_PROVIDER</span>=<span class="cs">edge</span>      <span class="cm"># free</span>
+<span class="cv">ASR_PROVIDER</span>=<span class="cs">whisper</span>   <span class="cm"># free, local</span>
+      </div>
+      <div class="vf-result">
+        <div class="vf-result-dot"></div>
+        Talk to Claude. Hear Claude talk back.
+      </div>
+    </div>
+
+    <!-- OpenAI -->
+    <div class="vf-card">
+      <div class="vf-logo">
+        <div class="vf-logo-dot" style="background:#10a37f"></div>
+        <span class="vf-logo-name">GPT-4o</span>
+        <span class="vf-logo-badge">OpenAI</span>
+      </div>
+      <div class="vf-desc">Use your OpenAI API key directly. GPT-4o for the brain, Edge TTS for the voice, Whisper for the ears — all on your own server.</div>
+      <div class="vf-code">
+<span class="cm"># .env — one key, direct to OpenAI</span>
+<span class="cv">LLM_PROVIDER</span>=<span class="cs">openai</span>
+<span class="cv">OPENAI_API_KEY</span>=<span class="cs">sk-...</span>
+<span class="cv">OPENAI_MODEL</span>=<span class="cs">gpt-4o-mini</span>  <span class="cm"># or gpt-4o</span>
+<span class="cv">TTS_PROVIDER</span>=<span class="cs">edge</span>           <span class="cm"># free</span>
+<span class="cv">ASR_PROVIDER</span>=<span class="cs">whisper</span>        <span class="cm"># free, local</span>
+      </div>
+      <div class="vf-result">
+        <div class="vf-result-dot"></div>
+        GPT-4o with a voice. Under 5 minutes.
+      </div>
+    </div>
+
+    <!-- Ollama — zero cost -->
+    <div class="vf-card">
+      <div class="vf-logo">
+        <div class="vf-logo-dot" style="background:#555"></div>
+        <span class="vf-logo-name">Ollama</span>
+        <span class="vf-logo-badge">100% Local · Free</span>
+      </div>
+      <div class="vf-desc">No API key at all. Llama 3, Mistral, Phi-3 — running on your own machine. Zero cloud dependency, zero cost, zero data leaving your device.</div>
+      <div class="vf-code">
+<span class="cm"># .env — zero API keys needed</span>
+<span class="cv">LLM_PROVIDER</span>=<span class="cs">ollama</span>
+<span class="cv">OLLAMA_MODEL</span>=<span class="cs">llama3</span>   <span class="cm"># or mistral, phi3</span>
+<span class="cv">ASR_PROVIDER</span>=<span class="cs">whisper</span>  <span class="cm"># local, free</span>
+<span class="cv">TTS_PROVIDER</span>=<span class="cs">edge</span>     <span class="cm"># free</span>
+<span class="cm"># prerequisite: brew install ollama</span>
+      </div>
+      <div class="vf-result">
+        <div class="vf-result-dot"></div>
+        Fully local. Zero keys. Zero cost.
+      </div>
+    </div>
+
+  </div>
+  <div class="vf-bottom">
+    <div class="vf-bottom-text">
+      <strong>OmniVoice is the voice layer — not the AI.</strong> Use whichever LLM you already pay for, trust, or run locally. Switch providers with one line in .env. Also works with OpenRouter, Gemini, Mistral, DeepSeek, and any OpenAI-compatible endpoint.
+    </div>
+    <div class="vf-arch-chip">🎙 MIC → ASR → <span>YOUR LLM</span> → TTS → 🔊</div>
+    <div class="vf-arch-chip">WhatsApp → ASR → <span>YOUR LLM</span> → TTS → WhatsApp</div>
+  </div>
+</div>
+
+<!-- PROVIDERS -->
+<div class="providers-section fade" id="providers">
+  <div class="prov-label">// Works with</div>
+  <div class="prov-chips">
+    <div class="pchip"><span class="pchip-dot" style="background:#00bfb3"></span>Deepgram</div>
+    <div class="pchip"><span class="pchip-dot" style="background:#10a37f"></span>OpenAI Whisper</div>
+    <div class="pchip"><span class="pchip-dot" style="background:#c792ea"></span>AssemblyAI</div>
+    <div class="pchip"><span class="pchip-dot" style="background:#4a90d9"></span>Azure Speech</div>
+    <div class="pchip"><span class="pchip-dot" style="background:#10a37f"></span>GPT-4o</div>
+    <div class="pchip"><span class="pchip-dot" style="background:#c97a3a"></span>Claude Sonnet</div>
+    <div class="pchip"><span class="pchip-dot" style="background:#7c5cfc"></span>OpenRouter</div>
+    <div class="pchip"><span class="pchip-dot" style="background:#555"></span>Ollama (local)</div>
+    <div class="pchip"><span class="pchip-dot" style="background:#f5a623"></span>ElevenLabs</div>
+    <div class="pchip"><span class="pchip-dot" style="background:#e84393"></span>Twilio</div>
+    <div class="pchip"><span class="pchip-dot" style="background:#f38020"></span>Cloudflare</div>
+    <div class="pchip"><span class="pchip-dot" style="background:#e6db74"></span>Prometheus</div>
+  </div>
+</div>
+
+<!-- COMPARE -->
+<div class="compare-section fade" id="compare">
+  <div class="compare-header">
+    <h2>VS <span>THE COMPETITION.</span></h2>
+    <p>// Great until they're not. Here's what you give up.</p>
+  </div>
+  <table>
+    <thead>
+      <tr><th>Feature</th><th class="ov">OmniVoice</th><th>Vapi</th><th>Retell AI</th><th>Bland AI</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Pricing</td><td class="ov-td">Free (self-hosted)</td><td>$0.13–0.31/min</td><td>$0.07/min</td><td>Per API call</td></tr>
+      <tr><td>Self-hostable</td><td class="ov-td yes">YES</td><td class="no">NO</td><td class="no">NO</td><td class="no">NO</td></tr>
+      <tr><td>Audio on your server</td><td class="ov-td yes">YES</td><td class="no">NO</td><td class="no">NO</td><td class="no">NO</td></tr>
+      <tr><td>Provider-agnostic</td><td class="ov-td yes">FULL</td><td>PARTIAL</td><td>PARTIAL</td><td class="no">NO</td></tr>
+      <tr><td>WhatsApp + Phone</td><td class="ov-td yes">YES</td><td>Phone only</td><td>Phone only</td><td>Phone only</td></tr>
+      <tr><td>Open source</td><td class="ov-td yes">YES (MIT)</td><td class="no">NO</td><td class="no">NO</td><td class="no">NO</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- CTA -->
+<div class="cta-section fade">
+  <div class="cta-left">
+    <h2>YOUR AI.<br/>THEIR<br/>WHATSAPP.</h2>
+    <p>2 billion people already send voice notes. Point OmniVoice at Claude or GPT-4o, connect your Twilio number, and they're talking to your AI — no app download, no new interface, no $0.31/min bill.</p>
+    <div class="cta-btns">
+      <button class="btn-dark" onclick="scrollToWaitlist()">GET ON THE LIST →</button>
+      <a href="#" class="btn-outline" onclick="placeholder(event)">★ GITHUB</a>
+    </div>
+  </div>
+  <div class="cta-right">
+    <div class="cd-label">// Launching in</div>
+    <div class="cd-row">
+      <div class="cd-box"><div class="cdn" id="cdd">14</div><div class="cdu">DAYS</div></div>
+      <div class="cd-box"><div class="cdn" id="cdh">00</div><div class="cdu">HRS</div></div>
+      <div class="cd-box"><div class="cdn" id="cdm">00</div><div class="cdu">MIN</div></div>
+      <div class="cd-box"><div class="cdn" id="cds">00</div><div class="cdu">SEC</div></div>
+    </div>
+    <div class="cd-note">Self-hosted voice AI infrastructure.<br/>Open source · MIT licensed · omnivoice.dev</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo-f">OMNI<span>VOICE</span></div>
+  <p>© 2026 OmniVoice · Open-source voice AI infrastructure</p>
+  <p class="fr">omnivoice.dev</p>
+</footer>
+
+<script>
+// ── WhatsApp chat animation ─────────────────────────────────────────────────
+function runWaAnimation(){
+  const b1      = document.getElementById('wa-b1');
+  const typing  = document.getElementById('wa-typing');
+  const b2      = document.getElementById('wa-b2');
+  const status  = document.getElementById('wa-status');
+  if(!b1||!typing||!b2) return;
+
+  function reset(){
+    b1.style.opacity='0'; b1.style.transform='translateY(8px)';
+    typing.style.display='none'; typing.style.opacity='0';
+    b2.style.display='none'; b2.style.opacity='0'; b2.style.transform='translateY(8px)';
+    if(status) status.textContent='online';
+  }
+
+  function play(){
+    reset();
+    // Step 1: user bubble slides in
+    setTimeout(()=>{ b1.style.transition='opacity .4s ease,transform .4s ease'; b1.style.opacity='1'; b1.style.transform='none'; },400);
+    // Step 2: status → "typing…" + show typing bubble
+    setTimeout(()=>{
+      if(status) status.textContent='typing…';
+      typing.style.display='block';
+      void typing.offsetHeight;
+      typing.style.transition='opacity .3s ease,transform .3s ease';
+      typing.style.opacity='1'; typing.style.transform='none';
+    },1500);
+    // Step 3: hide typing, show AI reply
+    setTimeout(()=>{
+      typing.style.opacity='0';
+      setTimeout(()=>{ typing.style.display='none'; },300);
+      b2.style.display='block';
+      void b2.offsetHeight;
+      b2.style.transition='opacity .4s ease,transform .4s ease';
+      b2.style.opacity='1'; b2.style.transform='none';
+      if(status) status.textContent='online';
+    },3000);
+    // Step 4: loop
+    setTimeout(play, 6500);
+  }
+
+  // Start animation when section scrolls into view
+  const section = document.getElementById('howit');
+  if(!section){ play(); return; }
+  const obs = new IntersectionObserver((entries)=>{
+    if(entries[0].isIntersecting){ obs.disconnect(); play(); }
+  },{threshold:0.2});
+  obs.observe(section);
+}
+document.addEventListener('DOMContentLoaded', runWaAnimation);
+
+// PLACEHOLDER TOAST
+function showToast(msg){
+  let toast = document.getElementById('toast');
+  if(!toast){
+    toast = document.createElement('div');
+    toast.id = 'toast';
+    toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--y);color:#000;padding:12px 20px;font-family:var(--mono);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;z-index:10000;border:2px solid #000;white-space:normal;word-break:break-word;max-width:calc(100vw - 32px);width:max-content;text-align:center;opacity:0;transition:opacity .25s ease';
+    document.body.appendChild(toast);
+  }
+  clearTimeout(window._toastTimer);
+  toast.textContent = msg;
+  toast.style.opacity = '0';
+  // Force reflow so the fade-in transition fires every time
+  void toast.offsetHeight;
+  toast.style.opacity = '1';
+  window._toastTimer = setTimeout(()=>{ toast.style.opacity='0'; }, 3000);
+}
+
+function placeholder(e){
+  e.preventDefault();
+  showToast('// Not live yet. Join the waitlist and be first in line.');
+  // After toast shows, scroll to the waitlist
+  setTimeout(() => scrollToWaitlist(), 300);
+}
+
+// COUNTDOWN
+const launch = new Date(Date.now() + 14*24*60*60*1000);
+function tick(){
+  const d = launch - Date.now();
+  if(d<=0) return;
+  const dd=Math.floor(d/864e5), h=Math.floor(d%864e5/36e5), m=Math.floor(d%36e5/6e4), s=Math.floor(d%6e4/1e3);
+  document.getElementById('cdd').textContent = String(dd).padStart(2,'0');
+  document.getElementById('cdh').textContent = String(h).padStart(2,'0');
+  document.getElementById('cdm').textContent = String(m).padStart(2,'0');
+  document.getElementById('cds').textContent = String(s).padStart(2,'0');
+  document.getElementById('hd').textContent  = String(dd).padStart(2,'0');
+  document.getElementById('hh').textContent  = String(h).padStart(2,'0');
+  document.getElementById('hm').textContent  = String(m).padStart(2,'0');
+  document.getElementById('hs').textContent  = String(s).padStart(2,'0');
+}
+tick(); setInterval(tick,1000);
+
+// WAITLIST
+async function joinWaitlist(){
+  const input = document.getElementById('email');
+  const note  = document.getElementById('wl-note');
+  const email = input.value.trim();
+  if(!email) return;
+
+  const btn = document.querySelector('.wl-submit button');
+  btn.textContent = '// Joining...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('https://omnivoice.dev/waitlist', {
+      method:  'POST',
+      headers: {'Content-Type': 'application/json'},
+      body:    JSON.stringify({ email })
+    });
+    const data = await res.json();
+
+    if(res.status === 409){
+      note.style.color = 'var(--y)';
+      note.textContent = '// Already on the list — we got you.';
+    } else if(res.ok){
+      note.style.color = 'var(--g)';
+      note.textContent = '// ✓ Locked in: ' + email + ' — see you at launch.';
+      input.value = '';
+    } else {
+      note.style.color = 'var(--r)';
+      note.textContent = '// Something went wrong. Try again.';
+    }
+  } catch(err) {
+    note.style.color = 'var(--r)';
+    note.textContent = '// Could not reach server. Try again shortly.';
+  }
+
+  btn.textContent = './join_waitlist --early-access';
+  btn.disabled = false;
+}
+document.getElementById('email').addEventListener('keydown', e => { if(e.key==='Enter') joinWaitlist(); });
+
+// WAITLIST SCROLL
+function getAbsoluteTop(el){
+  let top = 0;
+  while(el){ top += el.offsetTop; el = el.offsetParent; }
+  return top;
+}
+function scrollToWaitlist(){
+  const form = document.querySelector('.wl-form');
+  const input = document.getElementById('email');
+  if(!form) return;
+  const navH = (document.querySelector('nav') || {offsetHeight:60}).offsetHeight;
+  const top = getAbsoluteTop(form) - navH - 16;
+  const isMobile = window.innerWidth <= 520;
+
+  window.scrollTo({ top, behavior:'smooth' });
+
+  if(!isMobile){
+    // Desktop: focus input after scroll settles
+    let scrollTimer;
+    const onScroll = () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        window.removeEventListener('scroll', onScroll);
+        input && input.focus();
+      }, 80);
+    };
+    window.addEventListener('scroll', onScroll, { passive:true });
+    // Fallback if already at position
+    setTimeout(() => {
+      window.removeEventListener('scroll', onScroll);
+      input && input.focus();
+    }, 900);
+  }
+}
+
+// MOBILE MENU
+function toggleMobileMenu(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMobileMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+// SCROLL FADE — threshold 0 so even 1px visible triggers on mobile
+const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); }), {threshold:0, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

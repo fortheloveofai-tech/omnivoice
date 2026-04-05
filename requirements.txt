@@ -1,0 +1,24 @@
+# ── Core (always required) ────────────────────────────────────────────────────
+uvicorn
+fastapi
+httpx
+pydub
+python-dotenv
+pydantic-settings
+prometheus-client
+python-multipart
+twilio
+edge-tts
+openai              # covers GPT-4o AND OpenRouter (one key for both)
+
+# ── ASR providers (deepgram default, whisper = free/local/no key) ─────────────
+# deepgram  → no extra install (uses httpx REST directly)
+# whisper   → pip install openai-whisper  +  brew install ffmpeg
+
+# ── TTS providers (edge-tts above is free, no key needed) ────────────────────
+# elevenlabs → pip install elevenlabs
+# openai tts → already included via openai package
+
+# ── Voice CLI (local mic recording) ──────────────────────────────────────────
+sounddevice
+numpy

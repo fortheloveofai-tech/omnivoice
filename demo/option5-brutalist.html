@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>OmniVoice — Brutalist</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d0d0d;--s:#1a1a1a;--t:#f0f0f0;--m:#555;--y:#f5e642;--r:#ff3c3c;--g:#3cffa0;--b2:#3c8fff;--mono:'JetBrains Mono',monospace}
+body{background:var(--bg);color:var(--t);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* NAV */
+nav{display:flex;align-items:stretch;border-bottom:2px solid var(--t);background:var(--bg)}
+.logo-nav{font-size:18px;font-weight:900;letter-spacing:-1px;padding:18px 32px;border-right:2px solid var(--t);color:var(--y)}
+.nav-links{display:flex;align-items:center;flex:1;padding:0 32px;gap:32px}
+.nav-links a{color:var(--m);text-decoration:none;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;transition:color .15s}
+.nav-links a:hover{color:var(--t)}
+.nav-pill{margin-left:auto;background:var(--y);color:#000;padding:18px 28px;border:none;font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:2px;cursor:pointer;font-family:inherit;border-left:2px solid var(--t)}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1fr 1fr;border-bottom:2px solid var(--t)}
+.hero-left{padding:60px 48px;border-right:2px solid var(--t)}
+.hero-tag{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--y);margin-bottom:28px;font-family:var(--mono)}
+h1{font-size:clamp(52px,6vw,88px);font-weight:900;letter-spacing:-4px;line-height:.9;text-transform:uppercase;margin-bottom:32px}
+h1 .y{color:var(--y)}
+h1 .r{color:var(--r)}
+.hero-desc{font-size:16px;color:var(--m);line-height:1.7;margin-bottom:40px;max-width:480px;border-left:3px solid var(--y);padding-left:16px}
+
+.wl-form{display:flex;flex-direction:column;gap:0;border:2px solid var(--t);max-width:440px}
+.wl-form input{background:var(--s);border:none;border-bottom:2px solid var(--t);color:var(--t);padding:16px 18px;font-size:15px;font-family:inherit;outline:none}
+.wl-form input::placeholder{color:var(--m)}
+.wl-form button{background:var(--y);color:#000;border:none;padding:16px 18px;font-size:14px;font-weight:900;font-family:inherit;text-transform:uppercase;letter-spacing:2px;cursor:pointer;transition:background .15s}
+.wl-form button:hover{background:#fff}
+
+.hero-right{display:flex;flex-direction:column}
+.hero-stat{padding:32px 40px;border-bottom:2px solid var(--t);flex:1;display:flex;flex-direction:column;justify-content:center}
+.hero-stat:last-child{border-bottom:none}
+.hs-num{font-size:clamp(40px,5vw,64px);font-weight:900;letter-spacing:-3px;line-height:1;font-family:var(--mono)}
+.hs-num.y{color:var(--y)}
+.hs-num.g{color:var(--g)}
+.hs-num.r{color:var(--r)}
+.hs-num.b{color:var(--b2)}
+.hs-lbl{font-size:13px;color:var(--m);margin-top:6px;text-transform:uppercase;letter-spacing:1.5px;font-weight:700}
+
+/* MARQUEE */
+.marquee-wrap{border-bottom:2px solid var(--t);overflow:hidden;white-space:nowrap;padding:14px 0;background:var(--y)}
+.marquee-inner{display:inline-block;animation:scroll 20s linear infinite}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.marquee-text{display:inline-block;font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:3px;color:#000;padding:0 32px}
+.marquee-dot{color:#000;opacity:.3;margin:0 8px}
+
+/* PIPELINE */
+.pipeline-section{border-bottom:2px solid var(--t)}
+.section-header{display:flex;align-items:center;justify-content:space-between;padding:24px 48px;border-bottom:2px solid var(--t)}
+.sh-title{font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:3px;color:var(--m)}
+.sh-tag{font-size:11px;font-family:var(--mono);color:var(--y)}
+.pipe-grid{display:grid;grid-template-columns:repeat(8,1fr)}
+.pipe-node{padding:32px 20px;border-right:2px solid var(--t);text-align:center;transition:background .15s;cursor:default}
+.pipe-node:last-child{border-right:none}
+.pipe-node:hover{background:var(--s)}
+.pn-icon{font-size:24px;margin-bottom:12px}
+.pn-name{font-size:14px;font-weight:900;font-family:var(--mono);color:var(--y);margin-bottom:6px}
+.pn-ms{font-size:11px;color:var(--m);font-family:var(--mono)}
+
+/* FEATURES */
+.features-section{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:2px solid var(--t)}
+.feat-block{padding:40px 40px;border-right:2px solid var(--t);transition:background .15s}
+.feat-block:last-child{border-right:none}
+.feat-block:hover{background:var(--s)}
+.fb-num{font-size:11px;font-weight:900;font-family:var(--mono);color:var(--m);letter-spacing:2px;margin-bottom:20px}
+.fb-icon{font-size:32px;margin-bottom:16px}
+.fb-title{font-size:19px;font-weight:900;margin-bottom:12px;letter-spacing:-.5px}
+.fb-desc{font-size:14px;color:var(--m);line-height:1.7}
+
+/* COMPARE */
+.compare-section{border-bottom:2px solid var(--t)}
+.compare-header{padding:32px 48px;border-bottom:2px solid var(--t)}
+.compare-header h2{font-size:clamp(32px,4vw,52px);font-weight:900;letter-spacing:-2px;text-transform:uppercase}
+.compare-header h2 span{color:var(--r)}
+table{width:100%;border-collapse:collapse}
+th{padding:16px 28px;text-align:left;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:var(--m);border-bottom:2px solid var(--t);border-right:2px solid var(--t)}
+th:last-child{border-right:none}
+th.ov{color:var(--y)}
+td{padding:16px 28px;font-size:14px;border-bottom:2px solid var(--s);border-right:2px solid var(--s);color:var(--m)}
+td:first-child{color:var(--t);font-weight:700}
+td:last-child{border-right:none}
+.ov-td{color:var(--y);font-weight:900}
+tr:last-child td{border-bottom:none}
+.yes{color:var(--g);font-weight:900}.no{color:var(--r)}
+
+/* CTA */
+.cta-section{display:grid;grid-template-columns:1fr 1fr}
+.cta-left{padding:60px 48px;border-right:2px solid var(--t);background:var(--y)}
+.cta-left h2{font-size:clamp(36px,4vw,60px);font-weight:900;letter-spacing:-3px;text-transform:uppercase;color:#000;margin-bottom:16px;line-height:.9}
+.cta-left p{font-size:15px;color:rgba(0,0,0,.5);margin-bottom:32px;line-height:1.6}
+.cta-left button{background:#000;color:var(--y);border:none;padding:16px 28px;font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:2px;cursor:pointer;font-family:inherit}
+.cta-right{padding:60px 48px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px}
+.cta-right .cd-label{font-size:11px;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:var(--m);align-self:flex-start}
+.cd-big-row{display:flex;gap:12px;width:100%}
+.cd-big{flex:1;border:2px solid var(--t);padding:20px;text-align:center}
+.cdn{font-size:40px;font-weight:900;font-family:var(--mono);color:var(--y);line-height:1}
+.cdu{font-size:10px;color:var(--m);letter-spacing:2px;text-transform:uppercase;margin-top:4px}
+
+footer{border-top:2px solid var(--t);display:flex;align-items:center;justify-content:space-between;padding:20px 48px}
+.logo-f{font-size:16px;font-weight:900;color:var(--y);letter-spacing:-1px}
+footer p{font-size:12px;color:var(--m);text-transform:uppercase;letter-spacing:1px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo-nav">OMNIVOICE</div>
+  <div class="nav-links">
+    <a href="#">Pipeline</a>
+    <a href="#">Features</a>
+    <a href="#">Docs</a>
+    <a href="#">GitHub</a>
+  </div>
+  <button class="nav-pill">Join Waitlist</button>
+</nav>
+
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">⚡ Voice AI Infrastructure · Launching in 14 Days</div>
+    <h1>VOICE AI.<br/><span class="y">NO TAX.</span><br/><span class="r">NO LOCK-IN.</span></h1>
+    <p class="hero-desc">Self-hosted, provider-agnostic, sub-300ms pipeline. Swap ASR, LLM, and TTS like building blocks. Your audio never leaves your server. Kill the per-minute bill forever.</p>
+    <div class="wl-form">
+      <input type="email" id="em5" placeholder="your@email.com — join the waitlist"/>
+      <button onclick="join5()">GET EARLY ACCESS →</button>
+    </div>
+    <p id="wl5" style="font-size:12px;color:var(--m);margin-top:12px;font-family:var(--mono)">// no credit card required</p>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat"><div class="hs-num y">&lt;300ms</div><div class="hs-lbl">End-to-end latency</div></div>
+    <div class="hero-stat"><div class="hs-num g">$0</div><div class="hs-lbl">Platform fee (self-hosted)</div></div>
+    <div class="hero-stat"><div class="hs-num b">7+</div><div class="hs-lbl">Swappable providers</div></div>
+    <div class="hero-stat"><div class="hs-num r">MIT</div><div class="hs-lbl">Open source license</div></div>
+  </div>
+</div>
+
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span class="marquee-text">NO VENDOR LOCK-IN</span><span class="marquee-dot">◆</span>
+    <span class="marquee-text">SELF-HOSTED</span><span class="marquee-dot">◆</span>
+    <span class="marquee-text">SUB-300MS</span><span class="marquee-dot">◆</span>
+    <span class="marquee-text">OPEN SOURCE</span><span class="marquee-dot">◆</span>
+    <span class="marquee-text">WHATSAPP + PHONE</span><span class="marquee-dot">◆</span>
+    <span class="marquee-text">MIT LICENSE</span><span class="marquee-dot">◆</span>
+    <span class="marquee-text">NO VENDOR LOCK-IN</span><span class="marquee-dot">◆</span>
+    <span class="marquee-text">SELF-HOSTED</span><span class="marquee-dot">◆</span>
+    <span class="marquee-text">SUB-300MS</span><span class="marquee-dot">◆</span>
+    <span class="marquee-text">OPEN SOURCE</span><span class="marquee-dot">◆</span>
+    <span class="marquee-text">WHATSAPP + PHONE</span><span class="marquee-dot">◆</span>
+    <span class="marquee-text">MIT LICENSE</span><span class="marquee-dot">◆</span>
+  </div>
+</div>
+
+<div class="pipeline-section">
+  <div class="section-header">
+    <span class="sh-title">Pipeline</span>
+    <span class="sh-tag">8 stages · each independently swappable</span>
+  </div>
+  <div class="pipe-grid">
+    <div class="pipe-node"><div class="pn-icon">🎙️</div><div class="pn-name">MIC</div><div class="pn-ms">input</div></div>
+    <div class="pipe-node"><div class="pn-icon">👂</div><div class="pn-name">ASR</div><div class="pn-ms">~80ms</div></div>
+    <div class="pipe-node"><div class="pn-icon">⚡</div><div class="pn-name">ATTS</div><div class="pn-ms">~5ms</div></div>
+    <div class="pipe-node"><div class="pn-icon">🧠</div><div class="pn-name">LLM</div><div class="pn-ms">~120ms</div></div>
+    <div class="pipe-node"><div class="pn-icon">🪣</div><div class="pn-name">TAB</div><div class="pn-ms">~10ms</div></div>
+    <div class="pipe-node"><div class="pn-icon">📡</div><div class="pn-name">AQAL</div><div class="pn-ms">~5ms</div></div>
+    <div class="pipe-node"><div class="pn-icon">🔊</div><div class="pn-name">TTS</div><div class="pn-ms">~60ms</div></div>
+    <div class="pipe-node"><div class="pn-icon">🎧</div><div class="pn-name">OUT</div><div class="pn-ms">output</div></div>
+  </div>
+</div>
+
+<div class="features-section">
+  <div class="feat-block"><div class="fb-num">01 / PROVIDER</div><div class="fb-icon">🔌</div><div class="fb-title">One env var. Any provider.</div><div class="fb-desc">Deepgram, Whisper, GPT-4o, Claude, ElevenLabs — swap them all with a single environment variable change. No code rewrites.</div></div>
+  <div class="feat-block"><div class="fb-num">02 / CHANNELS</div><div class="fb-icon">📱</div><div class="fb-title">WhatsApp. Phone. Web.</div><div class="fb-desc">Twilio integration built-in. Voice notes, PSTN calls, and WebSocket — three channels, one pipeline, zero duplication.</div></div>
+  <div class="feat-block"><div class="fb-num">03 / PRIVACY</div><div class="fb-icon">🔒</div><div class="fb-title">Your server. Your audio.</div><div class="fb-desc">No SaaS middleman. No per-minute tax. No surprise bills. Deploy on any infrastructure you already own and trust.</div></div>
+</div>
+
+<div class="compare-section">
+  <div class="compare-header"><h2>VS THE <span>COMPETITION.</span></h2></div>
+  <table>
+    <thead><tr><th>Feature</th><th class="ov">OmniVoice</th><th>Vapi</th><th>Retell AI</th><th>Bland AI</th></tr></thead>
+    <tbody>
+      <tr><td>Pricing</td><td class="ov-td">Free (self-hosted)</td><td>$0.13–0.31/min</td><td>$0.07/min</td><td>Per API call</td></tr>
+      <tr><td>Self-hostable</td><td class="ov-td yes">YES</td><td class="no">NO</td><td class="no">NO</td><td class="no">NO</td></tr>
+      <tr><td>Your audio</td><td class="ov-td yes">YES</td><td class="no">NO</td><td class="no">NO</td><td class="no">NO</td></tr>
+      <tr><td>Provider choice</td><td class="ov-td yes">FULL</td><td>PARTIAL</td><td>PARTIAL</td><td class="no">NO</td></tr>
+      <tr><td>Open source</td><td class="ov-td yes">YES</td><td class="no">NO</td><td class="no">NO</td><td class="no">NO</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="cta-section">
+  <div class="cta-left">
+    <h2>SHIP IT.<br/>THIS WEEK.</h2>
+    <p>Early access in 14 days. Clone it, own it, ship it. No vendor is going to hold your pipeline hostage.</p>
+    <button onclick="window.scrollTo({top:0,behavior:'smooth'})">GET ON THE LIST →</button>
+  </div>
+  <div class="cta-right">
+    <span class="cd-label">Launching in</span>
+    <div class="cd-big-row">
+      <div class="cd-big"><div class="cdn" id="d5">14</div><div class="cdu">days</div></div>
+      <div class="cd-big"><div class="cdn" id="h5">00</div><div class="cdu">hrs</div></div>
+      <div class="cd-big"><div class="cdn" id="m5">00</div><div class="cdu">min</div></div>
+      <div class="cd-big"><div class="cdn" id="s5">00</div><div class="cdu">sec</div></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="logo-f">OMNIVOICE</div>
+  <p>Open-source voice AI infrastructure</p>
+  <p>omnivoice.dev</p>
+</footer>
+
+<script>
+const l=new Date(Date.now()+14*864e5);
+setInterval(()=>{const d=l-Date.now(),dd=Math.floor(d/864e5),h=Math.floor(d%864e5/36e5),m=Math.floor(d%36e5/6e4),s=Math.floor(d%6e4/1e3);['d5','h5','m5','s5'].forEach((id,i)=>document.getElementById(id).textContent=String([dd,h,m,s][i]).padStart(2,'0'))},1000);
+function join5(){const e=document.getElementById('em5').value;if(!e)return;document.getElementById('wl5').style.color='#3cffa0';document.getElementById('wl5').textContent='// ✓ locked in: '+e;document.getElementById('em5').value=''}
+</script>
+</body>
+</html>
