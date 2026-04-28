@@ -129,20 +129,7 @@ h1 .r{color:var(--r)}
 .bl-warn{color:var(--y)}
 @keyframes bootIn{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:none}}
 
-/* waitlist form */
-/* HERO COUNTDOWN */
-.hero-countdown{display:flex;align-items:center;gap:0;border:2px solid var(--b);margin-bottom:16px}
-.hcd-label{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--m2);padding:12px 16px;border-right:2px solid var(--b);white-space:nowrap}
-.hcd-blocks{display:flex;flex:1}
-.hcd-block{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 8px;border-right:2px solid var(--b)}
-.hcd-block:last-child{border-right:none}
-.hcd-num{font-size:22px;font-weight:700;font-family:'Inter',sans-serif;color:var(--y);line-height:1}
-.hcd-unit{font-size:8px;color:var(--m2);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
-
 .wl-form{display:flex;flex-direction:column;gap:0;border:2px solid var(--b)}
-.wl-form input{background:var(--s);border:none;border-bottom:2px solid var(--b);color:var(--t);padding:14px 18px;font-size:13px;font-family:var(--mono);outline:none}
-.wl-form input::placeholder{color:var(--m)}
-.wl-form input:focus{border-bottom-color:var(--g)}
 .wl-submit{display:flex}
 .wl-submit button{flex:1;background:var(--g);color:#000;border:none;padding:14px 20px;font-size:12px;font-weight:700;font-family:var(--mono);text-transform:uppercase;letter-spacing:2px;cursor:pointer;transition:background .15s}
 .wl-submit button:hover{background:#fff}
@@ -248,8 +235,8 @@ tr:hover td{background:var(--s)}
 .pchip-dot{width:6px;height:6px;border-radius:50%;background:var(--g)}
 
 /* ── CTA ── */
-.cta-section{display:grid;grid-template-columns:1fr 1fr}
-.cta-left{padding:60px 48px;border-right:2px solid var(--b);background:var(--y)}
+.cta-section{display:block}
+.cta-left{padding:60px 48px;background:var(--y)}
 .cta-left h2{font-size:clamp(40px,5vw,68px);font-weight:900;letter-spacing:-3px;text-transform:uppercase;color:#000;line-height:.88;margin-bottom:20px;font-family:'Inter',sans-serif}
 .cta-left p{font-size:13px;color:rgba(0,0,0,.5);line-height:1.8;margin-bottom:32px;max-width:380px}
 .cta-btns{display:flex;gap:10px}
@@ -257,14 +244,6 @@ tr:hover td{background:var(--s)}
 .btn-dark:hover{background:#111}
 .btn-outline{background:transparent;color:#000;border:2px solid rgba(0,0,0,.3);padding:12px 22px;font-size:11px;font-weight:700;font-family:var(--mono);text-transform:uppercase;letter-spacing:2px;cursor:pointer;text-decoration:none;display:inline-block;transition:border-color .15s}
 .btn-outline:hover{border-color:#000}
-.cta-right{padding:60px 48px;display:flex;flex-direction:column;justify-content:center;gap:20px}
-.cd-label{font-size:10px;text-transform:uppercase;letter-spacing:3px;color:var(--m2)}
-.cd-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.cd-box{border:2px solid var(--b);padding:20px 12px;text-align:center;transition:border-color .15s}
-.cd-box:hover{border-color:var(--g)}
-.cdn{font-size:clamp(28px,3vw,44px);font-weight:700;font-family:'Inter',sans-serif;color:var(--y);line-height:1}
-.cdu{font-size:9px;color:var(--m2);letter-spacing:2px;text-transform:uppercase;margin-top:4px}
-.cd-note{font-size:11px;color:var(--m);border-left:2px solid var(--b);padding-left:14px}
 
 /* ── HOW IT WORKS — WhatsApp mockup ── */
 .hiw-section{border-bottom:2px solid var(--b);background:var(--s2)}
@@ -440,13 +419,7 @@ footer .fr{text-align:right}
   .bl-key{min-width:100px;font-size:10px}
   .bl-val,.bl-ok,.bl-warn{font-size:10px}
 
-  /* Hero countdown */
-  .hero-countdown{flex-direction:row;width:100%}
-  .hcd-label{display:none}
-  .hcd-blocks{width:100%}
-  .hcd-block{padding:8px 4px}
-  .hcd-num{font-size:20px}
-  .hcd-unit{font-size:7px}
+
 
   /* Waitlist form */
   .wl-form{width:100%;margin-bottom:4px}
@@ -501,10 +474,6 @@ footer .fr{text-align:right}
   .cta-left p{font-size:12px}
   .cta-btns{flex-direction:column;gap:8px}
   .btn-dark,.btn-outline{width:100%;text-align:center;padding:14px 16px;box-sizing:border-box}
-  .cta-right{padding:32px 16px}
-  .cd-row{grid-template-columns:repeat(4,1fr);gap:4px}
-  .cdn{font-size:clamp(20px,6vw,32px)}
-  .cdu{font-size:8px}
 
   /* How It Works */
   .hiw-inner{padding:28px 16px;grid-template-columns:1fr;gap:32px}
@@ -538,8 +507,8 @@ footer .fr{text-align:right}
     <a href="#providers">PROVIDERS</a>
   </div>
   <div class="nav-right">
-    <a class="nav-gh" href="#" onclick="placeholder(event)">★ GITHUB</a>
-    <button class="nav-cta" onclick="scrollToWaitlist()">JOIN WAITLIST</button>
+    <a class="nav-gh" href="https://github.com/fortheloveofai-tech/omnivoice" target="_blank">★ GITHUB</a>
+    <a class="nav-cta" href="https://github.com/fortheloveofai-tech/omnivoice" target="_blank">★ STAR ON GITHUB</a>
     <!-- Mobile hamburger -->
     <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Menu">&#9776;</button>
   </div>
@@ -572,24 +541,12 @@ footer .fr{text-align:right}
       </div>
     </div>
 
-    <!-- HERO COUNTDOWN -->
-    <div class="hero-countdown">
-      <span class="hcd-label">// Launching in</span>
-      <div class="hcd-blocks">
-        <div class="hcd-block"><div class="hcd-num" id="hd">14</div><div class="hcd-unit">days</div></div>
-        <div class="hcd-block"><div class="hcd-num" id="hh">00</div><div class="hcd-unit">hrs</div></div>
-        <div class="hcd-block"><div class="hcd-num" id="hm">00</div><div class="hcd-unit">min</div></div>
-        <div class="hcd-block"><div class="hcd-num" id="hs">00</div><div class="hcd-unit">sec</div></div>
-      </div>
-    </div>
-
-    <!-- WAITLIST -->
+    <!-- GITHUB CTA -->
     <div class="wl-form">
-      <input type="email" id="email" placeholder="$ enter_email: your@company.com"/>
-      <div class="wl-submit">
-        <button onclick="joinWaitlist()">./join_waitlist --early-access</button>
-      </div>
-      <div class="wl-note" id="wl-note">// no credit card · no vendor lock-in · just the pipeline</div>
+      <a class="wl-submit" href="https://github.com/fortheloveofai-tech/omnivoice" target="_blank" style="text-decoration:none;display:block">
+        <button style="width:100%">★ star on github · it's open source</button>
+      </a>
+      <div class="wl-note">// open source · MIT licensed · no credit card</div>
     </div>
   </div>
 
@@ -1027,19 +984,9 @@ footer .fr{text-align:right}
     <h2>YOUR AI.<br/>THEIR<br/>WHATSAPP.</h2>
     <p>2 billion people already send voice notes. Point OmniVoice at Claude or GPT-4o, connect your Twilio number, and they're talking to your AI — no app download, no new interface, no $0.31/min bill.</p>
     <div class="cta-btns">
-      <button class="btn-dark" onclick="scrollToWaitlist()">GET ON THE LIST →</button>
-      <a href="#" class="btn-outline" onclick="placeholder(event)">★ GITHUB</a>
+      <a href="https://github.com/fortheloveofai-tech/omnivoice" target="_blank" class="btn-dark">★ STAR ON GITHUB →</a>
+      <a href="https://github.com/fortheloveofai-tech/omnivoice" target="_blank" class="btn-outline">VIEW ON GITHUB</a>
     </div>
-  </div>
-  <div class="cta-right">
-    <div class="cd-label">// Launching in</div>
-    <div class="cd-row">
-      <div class="cd-box"><div class="cdn" id="cdd">14</div><div class="cdu">DAYS</div></div>
-      <div class="cd-box"><div class="cdn" id="cdh">00</div><div class="cdu">HRS</div></div>
-      <div class="cd-box"><div class="cdn" id="cdm">00</div><div class="cdu">MIN</div></div>
-      <div class="cd-box"><div class="cdn" id="cds">00</div><div class="cdu">SEC</div></div>
-    </div>
-    <div class="cd-note">Self-hosted voice AI infrastructure.<br/>Open source · MIT licensed · omnivoice.dev</div>
   </div>
 </div>
 
@@ -1122,102 +1069,10 @@ function showToast(msg){
 
 function placeholder(e){
   e.preventDefault();
-  showToast('// Not live yet. Join the waitlist and be first in line.');
-  // After toast shows, scroll to the waitlist
-  setTimeout(() => scrollToWaitlist(), 300);
+  window.open('https://github.com/fortheloveofai-tech/omnivoice', '_blank');
 }
 
-// COUNTDOWN
-const launch = new Date(Date.now() + 14*24*60*60*1000);
-function tick(){
-  const d = launch - Date.now();
-  if(d<=0) return;
-  const dd=Math.floor(d/864e5), h=Math.floor(d%864e5/36e5), m=Math.floor(d%36e5/6e4), s=Math.floor(d%6e4/1e3);
-  document.getElementById('cdd').textContent = String(dd).padStart(2,'0');
-  document.getElementById('cdh').textContent = String(h).padStart(2,'0');
-  document.getElementById('cdm').textContent = String(m).padStart(2,'0');
-  document.getElementById('cds').textContent = String(s).padStart(2,'0');
-  document.getElementById('hd').textContent  = String(dd).padStart(2,'0');
-  document.getElementById('hh').textContent  = String(h).padStart(2,'0');
-  document.getElementById('hm').textContent  = String(m).padStart(2,'0');
-  document.getElementById('hs').textContent  = String(s).padStart(2,'0');
-}
-tick(); setInterval(tick,1000);
 
-// WAITLIST
-async function joinWaitlist(){
-  const input = document.getElementById('email');
-  const note  = document.getElementById('wl-note');
-  const email = input.value.trim();
-  if(!email) return;
-
-  const btn = document.querySelector('.wl-submit button');
-  btn.textContent = '// Joining...';
-  btn.disabled = true;
-
-  try {
-    const res = await fetch('https://omnivoice.dev/waitlist', {
-      method:  'POST',
-      headers: {'Content-Type': 'application/json'},
-      body:    JSON.stringify({ email })
-    });
-    const data = await res.json();
-
-    if(res.status === 409){
-      note.style.color = 'var(--y)';
-      note.textContent = '// Already on the list — we got you.';
-    } else if(res.ok){
-      note.style.color = 'var(--g)';
-      note.textContent = '// ✓ Locked in: ' + email + ' — see you at launch.';
-      input.value = '';
-    } else {
-      note.style.color = 'var(--r)';
-      note.textContent = '// Something went wrong. Try again.';
-    }
-  } catch(err) {
-    note.style.color = 'var(--r)';
-    note.textContent = '// Could not reach server. Try again shortly.';
-  }
-
-  btn.textContent = './join_waitlist --early-access';
-  btn.disabled = false;
-}
-document.getElementById('email').addEventListener('keydown', e => { if(e.key==='Enter') joinWaitlist(); });
-
-// WAITLIST SCROLL
-function getAbsoluteTop(el){
-  let top = 0;
-  while(el){ top += el.offsetTop; el = el.offsetParent; }
-  return top;
-}
-function scrollToWaitlist(){
-  const form = document.querySelector('.wl-form');
-  const input = document.getElementById('email');
-  if(!form) return;
-  const navH = (document.querySelector('nav') || {offsetHeight:60}).offsetHeight;
-  const top = getAbsoluteTop(form) - navH - 16;
-  const isMobile = window.innerWidth <= 520;
-
-  window.scrollTo({ top, behavior:'smooth' });
-
-  if(!isMobile){
-    // Desktop: focus input after scroll settles
-    let scrollTimer;
-    const onScroll = () => {
-      clearTimeout(scrollTimer);
-      scrollTimer = setTimeout(() => {
-        window.removeEventListener('scroll', onScroll);
-        input && input.focus();
-      }, 80);
-    };
-    window.addEventListener('scroll', onScroll, { passive:true });
-    // Fallback if already at position
-    setTimeout(() => {
-      window.removeEventListener('scroll', onScroll);
-      input && input.focus();
-    }, 900);
-  }
-}
 
 // MOBILE MENU
 function toggleMobileMenu(){
