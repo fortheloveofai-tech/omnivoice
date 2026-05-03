@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+python-dotenv
+httpx
+anthropic
+openai
+edge-tts
+openai-whisper
+deepgram-sdk
+sounddevice
+numpy
+pydub
+twilio
+python-multipart
